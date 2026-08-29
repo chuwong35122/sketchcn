@@ -1,0 +1,8 @@
+:root {
+	--sketch-bowing: 1.4;
+	--sketch-roughness: 1.1;
+	--sketch-stroke: currentColor;
+	--sketch-stroke-width: 1.6;
+	--sketch-disable-multi-stroke: true;
+	--sketch-preserve-vertices: true;
+}
