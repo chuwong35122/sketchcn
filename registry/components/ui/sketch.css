@@ -6,3 +6,14 @@
 	--sketch-disable-multi-stroke: true;
 	--sketch-preserve-vertices: true;
 }
+
+@keyframes sketch-icon-wiggle {
+	0%,
+	100% {
+		transform: rotate(-5deg);
+	}
+
+	50% {
+		transform: rotate(5deg);
+	}
+}
