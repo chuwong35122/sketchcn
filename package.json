@@ -9,6 +9,7 @@
     "dev": "vite dev --port 3005",
     "generate-routes": "tsr generate",
     "build": "vite build",
+    "build:registry": "shadcn build",
     "preview": "vite preview",
     "format": "biome format",
     "lint": "biome lint",
@@ -41,6 +42,7 @@
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.0.1",
     "babel-plugin-react-compiler": "^1.0.0",
+    "shadcn": "^4.19.0",
     "typescript": "^6.0.2",
     "vite": "^8.0.0"
   },

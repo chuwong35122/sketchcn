@@ -52,6 +52,7 @@ export function SketchProvider({
 
 
 export function useSketchOutline(options: SketchOutlineOptions = {}): SketchOutline {
+  const { opacity, ...roughOptions } = options;
   const theme = useSketch();
   const svgRef = useRef<SVGSVGElement>(null);
   const instanceId = useId();
@@ -76,8 +77,9 @@ export function useSketchOutline(options: SketchOutlineOptions = {}): SketchOutl
 
       const drawing = rough.svg(svg);
       const drawingOptions = {
-        ...options,
+        ...theme.options,
         ...getCssSketchOptions(target),
+        ...roughOptions,
         seed,
       };
       const rectangle = drawing.path(
@@ -120,12 +122,25 @@ export function useSketchOutline(options: SketchOutlineOptions = {}): SketchOutl
     style: {
       height: "100%",
       left: 0,
+      opacity,
       pointerEvents: "none",
       position: "absolute",
       top: 0,
       width: "100%",
     },
   };
+}
+
+export function useSketchBg(options: SketchOutlineOptions = {}): SketchOutline {
+  return useSketchOutline({
+    fill: "currentColor",
+    fillStyle: "hachure",
+    fillWeight: 0.4,
+    hachureGap: 4,
+    stroke: "transparent",
+    opacity: 0.5,
+    ...options,
+  });
 }
 
 function useSketch(): SketchTheme {

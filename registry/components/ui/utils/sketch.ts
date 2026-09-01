@@ -13,6 +13,7 @@ export const SketchContext = createContext<SketchTheme | null>(null);
 
 export type SketchOutlineOptions = Partial<Options> & {
 	borderRadius?: number;
+	opacity?: number;
 };
 
 export type SketchOutline = {
