@@ -11,7 +11,7 @@ const buttonVariants = cva(
         default:
           "isolate text-primary-foreground [--sketch-fill:var(--primary)] [--sketch-stroke:var(--primary)] [&>[data-sketch-outline]]:-z-10 hover:[--sketch-fill:color-mix(in_oklch,var(--primary),transparent_20%)]",
         outline:
-          "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+          "bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:bg-input/30 dark:hover:bg-input/50",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
         ghost:
