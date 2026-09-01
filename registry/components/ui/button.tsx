@@ -1,10 +1,10 @@
 import { Button as ButtonPrimitive } from "@base-ui/react/button"
 import { cva, type VariantProps } from "class-variance-authority"
 import cn from "cnfast"
-import { useSketchOutline } from "./sketch-provider"
+import { useSketchBg, useSketchOutline } from "./sketch-provider"
 
 const buttonVariants = cva(
-  "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 active:[&>svg:not([data-sketch-outline])]:animate-[sketch-icon-wiggle_180ms_ease-in-out_infinite]",
+  "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 active:[&>svg:not([data-sketch-outline]):not([data-sketch-bg])]:animate-[sketch-icon-wiggle_180ms_ease-in-out_infinite]",
   {
     variants: {
       variant: {
@@ -13,7 +13,7 @@ const buttonVariants = cva(
         outline:
           "bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:bg-input/30 dark:hover:bg-input/50",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+          "isolate bg-secondary text-secondary-foreground hover:bg-[color-mix(in_oklch,var(--secondary),var(--foreground)_5%)] aria-expanded:bg-secondary aria-expanded:text-secondary-foreground [&>[data-sketch-bg]]:-z-10",
         ghost:
           "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
         destructive:
@@ -49,6 +49,7 @@ function Button({
   ...props
 }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
 	const sketchOutline = useSketchOutline()
+	const sketchBg = useSketchBg({  })
 
   return (
     <ButtonPrimitive
@@ -57,6 +58,14 @@ function Button({
       {...props}
     >
 		{children}
+		{variant === "secondary" && (
+			<svg
+				aria-hidden="true"
+				data-sketch-bg
+				ref={sketchBg.ref}
+				style={sketchBg.style}
+			/>
+		)}
 		<svg
 			aria-hidden="true"
 			data-sketch-outline
@@ -67,4 +76,33 @@ function Button({
   )
 }
 
-export { Button, buttonVariants }
+const BUTTON_VARIANTS = [
+  "default",
+  "outline",
+  "secondary",
+  "ghost",
+  "destructive",
+  "link",
+] as const satisfies readonly NonNullable<VariantProps<typeof buttonVariants>["variant"]>[]
+
+const BUTTON_SIZES = [
+  "xs",
+  "sm",
+  "default",
+  "lg",
+] as const satisfies readonly NonNullable<VariantProps<typeof buttonVariants>["size"]>[]
+
+const ICON_BUTTON_SIZES = [
+  "icon-xs",
+  "icon-sm",
+  "icon",
+  "icon-lg",
+] as const satisfies readonly NonNullable<VariantProps<typeof buttonVariants>["size"]>[]
+
+export {
+  Button,
+  buttonVariants,
+  BUTTON_VARIANTS,
+  BUTTON_SIZES,
+  ICON_BUTTON_SIZES,
+}

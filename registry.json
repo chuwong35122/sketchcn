@@ -116,6 +116,24 @@
 			"dependencies": ["@base-ui/react", "class-variance-authority", "cnfast"],
 			"registryDependencies": ["default"],
 			"files": [{ "path": "registry/components/ui/toggle.tsx", "type": "registry:ui" }]
+		},
+		{
+			"name": "dialog",
+			"type": "registry:ui",
+			"title": "Dialog",
+			"description": "A hand-drawn Base UI dialog styled with shadcn conventions.",
+			"dependencies": ["@base-ui/react", "@boxicons/react", "cnfast"],
+			"registryDependencies": ["default", "sketch-provider", "button"],
+			"files": [{ "path": "registry/components/ui/dialog.tsx", "type": "registry:ui" }]
+		},
+		{
+			"name": "card",
+			"type": "registry:ui",
+			"title": "Card",
+			"description": "A hand-drawn card container styled with shadcn conventions.",
+			"dependencies": ["cnfast"],
+			"registryDependencies": ["default", "sketch-provider"],
+			"files": [{ "path": "registry/components/ui/card.tsx", "type": "registry:ui" }]
 		}
 	]
 }

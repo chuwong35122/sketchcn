@@ -3,15 +3,15 @@
 import { Toggle as TogglePrimitive } from "@base-ui/react/toggle"
 import { cva, type VariantProps } from "class-variance-authority"
 import cn from "cnfast"
-import { useSketchBg, useSketchOutline } from "./sketch-provider"
+import { useSketchOutline } from "./sketch-provider"
 
 const toggleVariants = cva(
-  "group/toggle inline-flex items-center justify-center gap-1 rounded-lg text-sm font-medium whitespace-nowrap transition-all outline-none hover:bg-muted hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+  "group/toggle isolate inline-flex items-center justify-center gap-1 rounded-lg text-sm font-medium whitespace-nowrap transition-all outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&>[data-sketch-outline]]:-z-10 hover:[--sketch-fill:color-mix(in_oklch,var(--muted-foreground),transparent_88%)] data-pressed:text-foreground data-pressed:[--sketch-fill:color-mix(in_oklch,var(--muted-foreground),transparent_75%)]",
   {
     variants: {
       variant: {
         default: "bg-transparent",
-        outline: "border border-input bg-transparent hover:bg-muted",
+        outline: "border border-input bg-transparent",
       },
       size: {
         default:
@@ -41,33 +41,15 @@ function Toggle({
       data-slot="toggle"
       className={cn("relative", toggleVariants({ variant, size, className }))}
       {...props}
-      render={(toggleProps, state) => (
-        <button {...toggleProps}>
-          {state.pressed && <ToggleSketchBackground />}
-          {children}
-          <svg
-            aria-hidden="true"
-            data-sketch-outline
-            ref={sketchOutline.ref}
-            style={sketchOutline.style}
-          />
-        </button>
-      )}
-    />
-  )
-}
-
-function ToggleSketchBackground() {
-  const sketchBackground = useSketchBg()
-
-  return (
-    <svg
-      aria-hidden="true"
-      className="text-muted-foreground/20"
-      data-sketch-background
-      ref={sketchBackground.ref}
-      style={sketchBackground.style}
-    />
+    >
+      {children}
+      <svg
+        aria-hidden="true"
+        data-sketch-outline
+        ref={sketchOutline.ref}
+        style={sketchOutline.style}
+      />
+    </TogglePrimitive>
   )
 }
 
