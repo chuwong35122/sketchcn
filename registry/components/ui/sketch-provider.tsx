@@ -8,7 +8,7 @@ import {
   useId,
   useLayoutEffect,
   useMemo,
-  useRef,
+  useState,
 } from "react";
 import rough from "roughjs";
 import type { Options } from "roughjs/bin/core";
@@ -54,13 +54,12 @@ export function SketchProvider({
 export function useSketchOutline(options: SketchOutlineOptions = {}): SketchOutline {
   const { opacity, ...roughOptions } = options;
   const theme = useSketch();
-  const svgRef = useRef<SVGSVGElement>(null);
+  const [svg, setSvg] = useState<SVGSVGElement | null>(null);
   const instanceId = useId();
 
   const seed = useMemo(() => createSeed(theme.seed, instanceId), [instanceId, theme.seed]);
 
   useLayoutEffect(() => {
-    const svg = svgRef.current;
     const target = svg?.parentElement;
 
     if (!svg || !target) {
@@ -115,10 +114,10 @@ export function useSketchOutline(options: SketchOutlineOptions = {}): SketchOutl
       attributeObserver.disconnect();
       observer.disconnect();
     };
-  }, [seed]);
+  }, [seed, svg]);
 
   return {
-    ref: svgRef,
+    ref: setSvg,
     style: {
       height: "100%",
       left: 0,

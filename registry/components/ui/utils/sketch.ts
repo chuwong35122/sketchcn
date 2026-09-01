@@ -1,4 +1,4 @@
-import { createContext, type CSSProperties, type RefObject } from "react";
+import { createContext, type CSSProperties, type Ref } from "react";
 import type { Options } from "roughjs/bin/core";
 
 export const DEFAULT_SEED = 20_260_828;
@@ -17,7 +17,7 @@ export type SketchOutlineOptions = Partial<Options> & {
 };
 
 export type SketchOutline = {
-	ref: RefObject<SVGSVGElement | null>;
+	ref: Ref<SVGSVGElement>;
 	style: CSSProperties;
 };
 
@@ -40,10 +40,14 @@ export function getCssSketchOptions(target: Element): Partial<Options> {
 	const strokeWidth = readCssNumber(styles, "--sketch-stroke-width");
 	const disableMultiStroke = readCssBoolean(styles, "--sketch-disable-multi-stroke");
 	const preserveVertices = readCssBoolean(styles, "--sketch-preserve-vertices");
+	const fill = styles.getPropertyValue("--sketch-fill").trim();
+	const fillStyle = styles.getPropertyValue("--sketch-fill-style").trim();
 
 	return {
 		...(bowing === undefined ? {} : { bowing }),
 		...(disableMultiStroke === undefined ? {} : { disableMultiStroke }),
+		...(fill === "" ? {} : { fill }),
+		...(fillStyle === "" ? {} : { fillStyle }),
 		...(roughness === undefined ? {} : { roughness }),
 		...(preserveVertices === undefined ? {} : { preserveVertices }),
 		...(stroke === "" ? {} : { stroke }),
