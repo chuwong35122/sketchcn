@@ -38,7 +38,7 @@ function ShowcaseCardRow({
 	return (
 		<div className="flex flex-col gap-2">
 			<span className="text-muted-foreground text-xs">{label}</span>
-			<div className="flex flex-wrap items-center gap-2">{children}</div>
+			<div className="flex flex-wrap items-center gap-2 p-4">{children}</div>
 		</div>
 	);
 }

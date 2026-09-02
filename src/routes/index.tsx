@@ -19,6 +19,7 @@ import {
 } from "../../registry/components/ui/dialog";
 import { Toggle } from "../../registry/components/ui/toggle";
 import { ButtonShowcaseCard } from "../components/button-showcase-card";
+import { CardShowcaseCard } from "../components/card-showcase-card";
 
 export const Route = createFileRoute("/")({ component: Home });
 
@@ -26,6 +27,7 @@ function Home() {
 	return (
 		<div className="grid gap-4 p-8 sm:grid-cols-2 lg:grid-cols-3">
 			<ButtonShowcaseCard />
+			<CardShowcaseCard />
 			<Card>
 				<CardHeader>
 					<CardTitle>Toggle</CardTitle>
