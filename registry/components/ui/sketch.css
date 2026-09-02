@@ -8,6 +8,11 @@
   --sketch-fill-style: solid;
 }
 
+[data-sketch-outline] path,
+[data-sketch-bg] path {
+  vector-effect: non-scaling-stroke;
+}
+
 [data-sketch-outline] path[fill]:not([fill="none"]) {
   fill: var(--sketch-fill);
   transition: fill 150ms ease;

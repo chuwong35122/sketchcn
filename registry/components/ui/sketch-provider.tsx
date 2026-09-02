@@ -16,9 +16,11 @@ import {
   createRoundedRectanglePath,
   createSeed,
   DEFAULT_SEED,
-  DEFAULT_STROKE_INSET,
+  DEFAULT_STROKE_WIDTH,
   getBorderRadius,
   getCssSketchOptions,
+  getPaddingBoxSize,
+  MIN_STROKE_WIDTH,
   SketchContext,
   type SketchOutline,
   type SketchOutlineOptions,
@@ -68,9 +70,9 @@ export function useSketchOutline(options: SketchOutlineOptions = {}): SketchOutl
 
     let frame = 0;
     const draw = () => {
-      const { height, width } = target.getBoundingClientRect();
+      const { height, width } = getPaddingBoxSize(target);
 
-      if (width === 0 || height === 0) {
+      if (width <= 0 || height <= 0) {
         return;
       }
 
@@ -81,14 +83,13 @@ export function useSketchOutline(options: SketchOutlineOptions = {}): SketchOutl
         ...roughOptions,
         seed,
       };
+      const strokeWidth = Math.max(
+        MIN_STROKE_WIDTH,
+        drawingOptions.strokeWidth ?? DEFAULT_STROKE_WIDTH,
+      );
       const rectangle = drawing.path(
-        createRoundedRectanglePath(
-          width,
-          height,
-          getBorderRadius(target),
-          drawingOptions.strokeWidth ?? DEFAULT_STROKE_INSET,
-        ),
-        drawingOptions,
+        createRoundedRectanglePath(width, height, getBorderRadius(target), strokeWidth),
+        { ...drawingOptions, strokeWidth },
       );
 
       svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
@@ -122,6 +123,8 @@ export function useSketchOutline(options: SketchOutlineOptions = {}): SketchOutl
       height: "100%",
       left: 0,
       opacity,
+      // Rough's wobble swings past the viewBox; the default svg clip shaves it to a hairline.
+      overflow: "visible",
       pointerEvents: "none",
       position: "absolute",
       top: 0,
