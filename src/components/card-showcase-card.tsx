@@ -83,6 +83,76 @@ export function CardShowcaseCard() {
 					</CardFooter>
 				</Card>
 			</ShowcaseCard.Row>
+			<ShowcaseCard.Row label="Paper textures">
+				<Card className="w-64">
+					<CardHeader>
+						<CardTitle>Paper</CardTitle>
+						<CardDescription>
+							{"Flecked, handmade paper grain."}
+						</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<p className="text-muted-foreground text-sm">
+							{"A subtle fiber texture behind the content."}
+						</p>
+					</CardContent>
+				</Card>
+				<Card variant="polkadots" className="w-64">
+					<CardHeader>
+						<CardTitle>Polka dots</CardTitle>
+						<CardDescription>{"Bullet-journal dot paper."}</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<p className="text-muted-foreground text-sm">
+							{"Staggered dots tiled across the card."}
+						</p>
+					</CardContent>
+				</Card>
+				<Card variant="hexagons" className="w-64">
+					<CardHeader>
+						<CardTitle>Hexagons</CardTitle>
+						<CardDescription>{"Honeycomb hexagon grid."}</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<p className="text-muted-foreground text-sm">
+							{"A seamless tiled honeycomb outline."}
+						</p>
+					</CardContent>
+				</Card>
+				<Card variant="graph" className="w-64">
+					<CardHeader>
+						<CardTitle>Graph</CardTitle>
+						<CardDescription>{"Engineering graph paper."}</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<p className="text-muted-foreground text-sm">
+							{"A tiled plus-grid graph paper texture."}
+						</p>
+					</CardContent>
+				</Card>
+				<Card variant="plus" className="w-64">
+					<CardHeader>
+						<CardTitle>Plus</CardTitle>
+						<CardDescription>{"Scattered plus-sign paper."}</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<p className="text-muted-foreground text-sm">
+							{"Small plus marks tiled across the card."}
+						</p>
+					</CardContent>
+				</Card>
+				<Card variant="filled-dots" className="w-64">
+					<CardHeader>
+						<CardTitle>Filled dots</CardTitle>
+						<CardDescription>{"Fine speckled dot paper."}</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<p className="text-muted-foreground text-sm">
+							{"A dense, tiny dot texture behind the content."}
+						</p>
+					</CardContent>
+				</Card>
+			</ShowcaseCard.Row>
 		</ShowcaseCard>
 	);
 }

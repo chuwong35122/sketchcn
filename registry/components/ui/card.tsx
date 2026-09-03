@@ -5,20 +5,33 @@ import * as React from "react"
 import cn from "cnfast"
 import { useSketchOutline } from "./sketch-provider"
 
+const CARD_VARIANTS = [
+  "default",
+  "polkadots",
+  "hexagons",
+  "graph",
+  "plus",
+  "filled-dots",
+] as const
+
+type CardVariant = (typeof CARD_VARIANTS)[number]
+
 function Card({
   className,
   children,
   size = "default",
+  variant = "default",
   ...props
-}: React.ComponentProps<"div"> & { size?: "default" | "sm" }) {
+}: React.ComponentProps<"div"> & { size?: "default" | "sm"; variant?: CardVariant }) {
   const sketchOutline = useSketchOutline()
 
   return (
     <div
       data-slot="card"
       data-size={size}
+      data-variant={variant}
       className={cn(
-        "group/card relative flex flex-col gap-(--card-spacing) overflow-clip [overflow-clip-margin:6px] rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl",
+        "group/card relative isolate flex flex-col gap-(--card-spacing) overflow-clip [overflow-clip-margin:6px] rounded-xl bg-card py-(--card-spacing) text-sm text-card-foreground [--card-spacing:--spacing(4)] has-data-[slot=card-footer]:pb-0 has-[>img:first-child]:pt-0 data-[size=sm]:[--card-spacing:--spacing(3)] data-[size=sm]:has-data-[slot=card-footer]:pb-0 *:[img:first-child]:rounded-t-xl *:[img:last-child]:rounded-b-xl",
         className
       )}
       {...props}
@@ -114,4 +127,5 @@ export {
   CardAction,
   CardDescription,
   CardContent,
+  CARD_VARIANTS,
 }
