@@ -2,6 +2,7 @@ import { ArrowLeft } from "@boxicons/react";
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Button } from "../../../registry/components/ui/button";
 import { findComponentShowcase } from "../../components/component-showcases";
+import { InstallTabs } from "../../components/install-tabs";
 
 export const Route = createFileRoute("/components/$name")({
 	loader: ({ params }) => {
@@ -33,6 +34,7 @@ function ComponentPage() {
 				All components
 			</Button>
 			<showcase.Showcase />
+			<InstallTabs name={showcase.slug} />
 		</div>
 	);
 }
