@@ -14,12 +14,11 @@ import { ShowcaseCard } from "./showcase-card";
 export function CardShowcaseCard() {
 	return (
 		<ShowcaseCard
-			className="sm:col-span-2 lg:col-span-3"
 			title="Card"
 			description="Every hand-drawn card composition and size."
 		>
 			<ShowcaseCard.Row label="Sizes">
-				<Card className="w-64">
+				<Card className="min-w-56 flex-1">
 					<CardHeader>
 						<CardTitle>Default size</CardTitle>
 						<CardDescription>
@@ -32,7 +31,7 @@ export function CardShowcaseCard() {
 						</p>
 					</CardContent>
 				</Card>
-				<Card size="sm" className="w-64">
+				<Card size="sm" className="min-w-56 flex-1">
 					<CardHeader>
 						<CardTitle>Small size</CardTitle>
 						<CardDescription>
@@ -47,7 +46,7 @@ export function CardShowcaseCard() {
 				</Card>
 			</ShowcaseCard.Row>
 			<ShowcaseCard.Row label="With action">
-				<Card className="w-64">
+				<Card className="min-w-56 flex-1">
 					<CardHeader>
 						<CardTitle>Sketch #12</CardTitle>
 						<CardDescription>{"Last edited a moment ago."}</CardDescription>
@@ -65,7 +64,7 @@ export function CardShowcaseCard() {
 				</Card>
 			</ShowcaseCard.Row>
 			<ShowcaseCard.Row label="With footer">
-				<Card className="w-64">
+				<Card className="min-w-56 flex-1">
 					<CardHeader>
 						<CardTitle>Publish sketch</CardTitle>
 						<CardDescription>
@@ -84,75 +83,56 @@ export function CardShowcaseCard() {
 				</Card>
 			</ShowcaseCard.Row>
 			<ShowcaseCard.Row label="Paper textures">
-				<Card className="w-64">
+				<Card className="min-w-56 flex-1">
 					<CardHeader>
 						<CardTitle>Paper</CardTitle>
 						<CardDescription>
 							{"Flecked, handmade paper grain."}
 						</CardDescription>
 					</CardHeader>
-					<CardContent>
-						<p className="text-muted-foreground text-sm">
-							{"A subtle fiber texture behind the content."}
-						</p>
-					</CardContent>
 				</Card>
-				<Card variant="polkadots" className="w-64">
+				<Card variant="polkadots" className="min-w-56 flex-1">
 					<CardHeader>
 						<CardTitle>Polka dots</CardTitle>
 						<CardDescription>{"Bullet-journal dot paper."}</CardDescription>
 					</CardHeader>
-					<CardContent>
-						<p className="text-muted-foreground text-sm">
-							{"Staggered dots tiled across the card."}
-						</p>
-					</CardContent>
 				</Card>
-				<Card variant="hexagons" className="w-64">
+				<Card variant="hexagons" className="min-w-56 flex-1">
 					<CardHeader>
 						<CardTitle>Hexagons</CardTitle>
 						<CardDescription>{"Honeycomb hexagon grid."}</CardDescription>
 					</CardHeader>
-					<CardContent>
-						<p className="text-muted-foreground text-sm">
-							{"A seamless tiled honeycomb outline."}
-						</p>
-					</CardContent>
 				</Card>
-				<Card variant="graph" className="w-64">
+				<Card variant="graph" className="min-w-56 flex-1">
 					<CardHeader>
 						<CardTitle>Graph</CardTitle>
 						<CardDescription>{"Engineering graph paper."}</CardDescription>
 					</CardHeader>
-					<CardContent>
-						<p className="text-muted-foreground text-sm">
-							{"A tiled plus-grid graph paper texture."}
-						</p>
-					</CardContent>
 				</Card>
-				<Card variant="plus" className="w-64">
+				<Card variant="plus" className="min-w-56 flex-1">
 					<CardHeader>
 						<CardTitle>Plus</CardTitle>
 						<CardDescription>{"Scattered plus-sign paper."}</CardDescription>
 					</CardHeader>
-					<CardContent>
-						<p className="text-muted-foreground text-sm">
-							{"Small plus marks tiled across the card."}
-						</p>
-					</CardContent>
 				</Card>
-				<Card variant="filled-dots" className="w-64">
+				<Card variant="filled-dots" className="min-w-56 flex-1">
 					<CardHeader>
 						<CardTitle>Filled dots</CardTitle>
 						<CardDescription>{"Fine speckled dot paper."}</CardDescription>
 					</CardHeader>
-					<CardContent>
-						<p className="text-muted-foreground text-sm">
-							{"A dense, tiny dot texture behind the content."}
-						</p>
-					</CardContent>
 				</Card>
 			</ShowcaseCard.Row>
+			<p className="text-muted-foreground text-xs">
+				{"Patterns from "}
+				<a
+					href="https://heropatterns.com/"
+					target="_blank"
+					rel="noreferrer"
+					className="underline"
+				>
+					{"Hero Patterns"}
+				</a>
+			</p>
 		</ShowcaseCard>
 	);
 }

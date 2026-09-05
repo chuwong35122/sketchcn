@@ -1,3 +1,4 @@
+import cn from "cnfast";
 import {
 	Card,
 	CardContent,
@@ -30,14 +31,18 @@ function ShowcaseCardRoot({
 
 function ShowcaseCardRow({
 	label,
+	labelClassName,
 	children,
 }: {
 	label: string;
+	labelClassName?: string;
 	children: React.ReactNode;
 }) {
 	return (
 		<div className="flex flex-col gap-2">
-			<span className="text-muted-foreground text-xs">{label}</span>
+			<span className={cn("text-muted-foreground text-xs", labelClassName)}>
+				{label}
+			</span>
 			<div className="flex flex-wrap items-center gap-2 p-4">{children}</div>
 		</div>
 	);

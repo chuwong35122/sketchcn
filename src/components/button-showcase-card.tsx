@@ -10,7 +10,6 @@ import { ShowcaseCard } from "./showcase-card";
 export function ButtonShowcaseCard() {
 	return (
 		<ShowcaseCard
-			className="sm:col-span-2 lg:col-span-3"
 			title="Button"
 			description="Every hand-drawn button variant, size and state."
 		>
