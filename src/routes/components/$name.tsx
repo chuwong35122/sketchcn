@@ -27,7 +27,7 @@ function ComponentPage() {
 				variant="link"
 				size="sm"
 				className="w-fit px-0"
-				// render={<Link to="/components" />}
+				render={<Link to="/components" />}
 			>
 				<ArrowLeft />
 				All components
