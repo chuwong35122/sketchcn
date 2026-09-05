@@ -82,7 +82,17 @@ export function CardShowcaseCard() {
 					</CardFooter>
 				</Card>
 			</ShowcaseCard.Row>
-			<ShowcaseCard.Row label="Paper textures">
+			<ShowcaseCard.Row
+				label="Paper textures"
+				note={
+					<ShowcaseCard.Note
+						href="https://heropatterns.com/"
+						linkLabel="Hero Patterns"
+					>
+						{"Patterns from "}
+					</ShowcaseCard.Note>
+				}
+			>
 				<Card className="min-w-56 flex-1">
 					<CardHeader>
 						<CardTitle>Paper</CardTitle>
@@ -122,17 +132,6 @@ export function CardShowcaseCard() {
 					</CardHeader>
 				</Card>
 			</ShowcaseCard.Row>
-			<p className="text-muted-foreground text-xs">
-				{"Patterns from "}
-				<a
-					href="https://heropatterns.com/"
-					target="_blank"
-					rel="noreferrer"
-					className="underline"
-				>
-					{"Hero Patterns"}
-				</a>
-			</p>
 		</ShowcaseCard>
 	);
 }
