@@ -12,9 +12,12 @@ export type SketchTheme = {
 
 export const SketchContext = createContext<SketchTheme | null>(null);
 
+export type SketchShape = "rectangle" | "underline";
+
 export type SketchOutlineOptions = Partial<Options> & {
 	borderRadius?: number;
 	opacity?: number;
+	shape?: SketchShape;
 };
 
 export type SketchOutline = {
@@ -109,6 +112,16 @@ export function createRoundedRectanglePath(
 		`Q ${left} ${top} ${left + cornerRadius} ${top}`,
 		"Z",
 	].join(" ");
+}
+
+export function createUnderlinePath(
+	width: number,
+	height: number,
+	strokeInset: number,
+): string {
+	const bottom = height - strokeInset;
+
+	return `M ${strokeInset} ${bottom} H ${width - strokeInset}`;
 }
 
 function readCssNumber(styles: CSSStyleDeclaration, property: string): number | undefined {

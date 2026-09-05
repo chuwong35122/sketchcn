@@ -15,6 +15,7 @@ import type { Options } from "roughjs/bin/core";
 import {
   createRoundedRectanglePath,
   createSeed,
+  createUnderlinePath,
   DEFAULT_SEED,
   DEFAULT_STROKE_WIDTH,
   getBorderRadius,
@@ -24,6 +25,7 @@ import {
   SketchContext,
   type SketchOutline,
   type SketchOutlineOptions,
+  type SketchShape,
   type SketchTheme,
 } from "./utils/sketch";
 
@@ -33,7 +35,7 @@ export type SketchProviderProps = {
   seed?: number;
 };
 
-export type { SketchOutline, SketchOutlineOptions } from "./utils/sketch";
+export type { SketchOutline, SketchOutlineOptions, SketchShape } from "./utils/sketch";
 
 export function SketchProvider({
   children,
@@ -54,7 +56,7 @@ export function SketchProvider({
 
 
 export function useSketchOutline(options: SketchOutlineOptions = {}): SketchOutline {
-  const { opacity, ...roughOptions } = options;
+  const { opacity, shape = "rectangle", ...roughOptions } = options;
   const theme = useSketch();
   const [svg, setSvg] = useState<SVGSVGElement | null>(null);
   const instanceId = useId();
@@ -87,13 +89,11 @@ export function useSketchOutline(options: SketchOutlineOptions = {}): SketchOutl
         MIN_STROKE_WIDTH,
         drawingOptions.strokeWidth ?? DEFAULT_STROKE_WIDTH,
       );
-      const rectangle = drawing.path(
-        createRoundedRectanglePath(width, height, getBorderRadius(target), strokeWidth),
-        { ...drawingOptions, strokeWidth },
-      );
+      const path = getSketchPath(shape, target, width, height, strokeWidth);
+      const drawn = drawing.path(path, { ...drawingOptions, strokeWidth });
 
       svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
-      svg.replaceChildren(rectangle);
+      svg.replaceChildren(drawn);
     };
 
     const scheduleDraw = () => {
@@ -115,7 +115,7 @@ export function useSketchOutline(options: SketchOutlineOptions = {}): SketchOutl
       attributeObserver.disconnect();
       observer.disconnect();
     };
-  }, [seed, svg]);
+  }, [seed, shape, svg]);
 
   return {
     ref: setSvg,
@@ -143,6 +143,20 @@ export function useSketchBg(options: SketchOutlineOptions = {}): SketchOutline {
     opacity: 0.5,
     ...options,
   });
+}
+
+function getSketchPath(
+  shape: SketchShape,
+  target: Element,
+  width: number,
+  height: number,
+  strokeWidth: number,
+): string {
+  if (shape === "underline") {
+    return createUnderlinePath(width, height, strokeWidth);
+  }
+
+  return createRoundedRectanglePath(width, height, getBorderRadius(target), strokeWidth);
 }
 
 function useSketch(): SketchTheme {
