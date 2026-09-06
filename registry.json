@@ -134,6 +134,15 @@
 			"dependencies": ["cnfast"],
 			"registryDependencies": ["default", "sketch-provider"],
 			"files": [{ "path": "registry/components/ui/card.tsx", "type": "registry:ui" }]
+		},
+		{
+			"name": "tabs",
+			"type": "registry:ui",
+			"title": "Tabs",
+			"description": "A hand-drawn Base UI tabs styled with shadcn conventions.",
+			"dependencies": ["@base-ui/react", "class-variance-authority", "cnfast"],
+			"registryDependencies": ["default", "sketch-provider"],
+			"files": [{ "path": "registry/components/ui/tabs.tsx", "type": "registry:ui" }]
 		}
 	]
 }
