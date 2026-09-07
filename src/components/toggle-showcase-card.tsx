@@ -1,9 +1,10 @@
 import { Bold, Italic, TextUnderline } from "@boxicons/react";
-import { Toggle } from "../../registry/components/ui/toggle";
+import {
+	TOGGLE_SIZES,
+	TOGGLE_VARIANTS,
+	Toggle,
+} from "../../registry/components/ui/toggle";
 import { ShowcaseCard } from "./showcase-card";
-
-const TOGGLE_VARIANTS = ["default", "outline"] as const;
-const TOGGLE_SIZES = ["sm", "default", "lg"] as const;
 
 export function ToggleShowcaseCard() {
 	return (

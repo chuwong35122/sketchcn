@@ -27,7 +27,10 @@
 
 [data-sketch-outline] path[fill]:not([fill="none"]) {
   fill: var(--sketch-fill);
-  transition: fill 150ms ease;
+  fill-opacity: var(--sketch-fill-opacity, 1);
+  transition:
+    fill 150ms ease,
+    fill-opacity 150ms ease;
 }
 
 [data-slot="card"][data-variant="polkadots"],
@@ -84,6 +87,16 @@
   --sketch-dash period, which would land back where it started) is never shown.
 */
 @keyframes sketch-dash-boil {
+  to {
+    stroke-dashoffset: -10;
+  }
+}
+
+/*
+  Alternating dashes: with a 5/5 dasharray the period is 10, so sampling the
+  -10 sweep at steps(2) swaps dash and gap positions on every other frame.
+*/
+@keyframes sketch-dash-alternate {
   to {
     stroke-dashoffset: -10;
   }

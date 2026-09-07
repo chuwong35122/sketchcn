@@ -6,12 +6,14 @@ import cn from "cnfast"
 import { useSketchOutline } from "./sketch-provider"
 
 const toggleVariants = cva(
-  "group/toggle isolate inline-flex items-center justify-center gap-1 rounded-lg text-sm font-medium whitespace-nowrap transition-all outline-none hover:text-foreground focus-visible:ring-[3px] focus-visible:ring-ring/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&>[data-sketch-outline]]:-z-10 hover:[--sketch-fill:color-mix(in_oklch,var(--muted-foreground),transparent_88%)] data-pressed:text-foreground data-pressed:[--sketch-fill:color-mix(in_oklch,var(--muted-foreground),transparent_75%)]",
+  "group/toggle relative isolate inline-flex items-center justify-center gap-1 rounded-lg text-sm font-medium whitespace-nowrap transition-all outline-none focus-visible:ring-3 focus-visible:ring-ring/50 active:translate-y-px disabled:pointer-events-none disabled:opacity-50 aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 [&>[data-sketch-outline]]:-z-10 [--sketch-fill:var(--primary)] [--sketch-fill-opacity:0]",
   {
     variants: {
       variant: {
-        default: "bg-transparent",
-        outline: "border border-input bg-transparent",
+        default:
+          "text-foreground/70 [--sketch-stroke:var(--primary)] hover:text-foreground hover:[--sketch-fill-opacity:0.12] data-pressed:text-primary-foreground data-pressed:[--sketch-fill-opacity:1] data-pressed:hover:[--sketch-fill-opacity:0.85]",
+        outline:
+          "text-foreground/70 hover:text-foreground hover:[--sketch-fill-opacity:0.08] data-pressed:text-foreground data-pressed:[--sketch-fill-opacity:0.14] data-pressed:[--sketch-dash:5_5] data-pressed:[--sketch-dash-animation:sketch-dash-alternate_1s_steps(2)_infinite]",
       },
       size: {
         default:
@@ -39,7 +41,7 @@ function Toggle({
   return (
     <TogglePrimitive
       data-slot="toggle"
-      className={cn("relative", toggleVariants({ variant, size, className }))}
+      className={cn(toggleVariants({ variant, size, className }))}
       {...props}
     >
       {children}
@@ -53,4 +55,15 @@ function Toggle({
   )
 }
 
-export { Toggle, toggleVariants }
+const TOGGLE_VARIANTS = [
+  "default",
+  "outline",
+] as const satisfies readonly NonNullable<VariantProps<typeof toggleVariants>["variant"]>[]
+
+const TOGGLE_SIZES = [
+  "sm",
+  "default",
+  "lg",
+] as const satisfies readonly NonNullable<VariantProps<typeof toggleVariants>["size"]>[]
+
+export { Toggle, toggleVariants, TOGGLE_VARIANTS, TOGGLE_SIZES }

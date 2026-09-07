@@ -114,7 +114,7 @@
 			"title": "Toggle",
 			"description": "A pressable Base UI toggle styled with shadcn conventions.",
 			"dependencies": ["@base-ui/react", "class-variance-authority", "cnfast"],
-			"registryDependencies": ["default"],
+			"registryDependencies": ["default", "sketch-provider"],
 			"files": [{ "path": "registry/components/ui/toggle.tsx", "type": "registry:ui" }]
 		},
 		{
