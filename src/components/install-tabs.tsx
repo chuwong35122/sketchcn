@@ -1,4 +1,10 @@
-import { Tabs } from "@base-ui/react/tabs";
+import { useSketchOutline } from "../../registry/components/ui/sketch-provider";
+import {
+	Tabs,
+	TabsContent,
+	TabsList,
+	TabsTrigger,
+} from "../../registry/components/ui/tabs";
 import { CopyButton } from "./copy-button";
 
 const REGISTRY_URL = "https://sketchcn.chuwii.com/r";
@@ -25,29 +31,41 @@ export function InstallTabs({ name }: { name: string }) {
 	const url = `${REGISTRY_URL}/${name}.json`;
 
 	return (
-		<Tabs.Root defaultValue="npm" className="flex flex-col gap-2">
-			<Tabs.List className="relative flex w-fit gap-1 rounded-lg border border-input bg-muted/40 p-1">
+		<Tabs defaultValue="npm" className="flex flex-col gap-2">
+			<TabsList className="w-fit">
 				{PACKAGE_MANAGERS.map((manager) => (
-					<Tabs.Tab
-						key={manager.id}
-						value={manager.id}
-						className="relative z-10 rounded-md px-3 py-1 text-muted-foreground text-sm transition-colors data-selected:text-foreground"
-					>
+					<TabsTrigger key={manager.id} value={manager.id}>
 						{manager.label}
-					</Tabs.Tab>
+					</TabsTrigger>
 				))}
-				<Tabs.Indicator className="absolute inset-y-1 left-0 z-0 w-(--active-tab-width) translate-x-(--active-tab-left) rounded-md bg-background shadow-xs transition-all duration-200 ease-out" />
-			</Tabs.List>
+			</TabsList>
 			{PACKAGE_MANAGERS.map((manager) => (
-				<Tabs.Panel key={manager.id} value={manager.id}>
-					<div className="flex items-center justify-between gap-2 rounded-lg border border-input bg-muted/40 px-3 py-2">
-						<code className="overflow-x-auto whitespace-nowrap font-mono text-sm">
-							{manager.command(url)}
-						</code>
-						<CopyButton value={manager.command(url)} />
-					</div>
-				</Tabs.Panel>
+				<TabsContent key={manager.id} value={manager.id}>
+					<CommandBox command={manager.command(url)} />
+				</TabsContent>
 			))}
-		</Tabs.Root>
+		</Tabs>
+	);
+}
+
+function CommandBox({ command }: { command: string }) {
+	const sketchOutline = useSketchOutline({
+		strokeLineDash: [6, 4],
+	});
+
+	return (
+		<div className="relative isolate flex items-center justify-between gap-2 rounded-lg bg-muted/40 px-3 py-2">
+			<code className="overflow-x-auto whitespace-nowrap font-mono text-sm">
+				{command}
+			</code>
+			<CopyButton value={command} />
+			<svg
+				aria-hidden="true"
+				data-sketch-outline
+				className="-z-10"
+				ref={sketchOutline.ref}
+				style={sketchOutline.style}
+			/>
+		</div>
 	);
 }
