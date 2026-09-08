@@ -64,20 +64,18 @@ export function getBorderRadius(target: Element): number {
 	return Number.parseFloat(getComputedStyle(target).borderTopLeftRadius) || 0;
 }
 
-/**
- * Measures the padding box rather than the border box.
- *
- * The outline `<svg>` is an absolutely positioned `100%` overlay, which resolves
- * against the padding box. Feeding it a border-box viewBox letterboxes the
- * drawing and scales the stroke down on any bordered element.
- */
-export function getPaddingBoxSize(target: Element): { height: number; width: number } {
+export function getPaddingBoxSize(target: HTMLElement): { height: number; width: number } {
 	const styles = getComputedStyle(target);
-	const rect = target.getBoundingClientRect();
 
 	return {
-		height: rect.height - readPixels(styles.borderTopWidth) - readPixels(styles.borderBottomWidth),
-		width: rect.width - readPixels(styles.borderLeftWidth) - readPixels(styles.borderRightWidth),
+		height:
+			target.offsetHeight -
+			readPixels(styles.borderTopWidth) -
+			readPixels(styles.borderBottomWidth),
+		width:
+			target.offsetWidth -
+			readPixels(styles.borderLeftWidth) -
+			readPixels(styles.borderRightWidth),
 	};
 }
 
