@@ -4,6 +4,7 @@ import { CardShowcaseCard } from "./card-showcase-card";
 import { DialogShowcaseCard } from "./dialog-showcase-card";
 import { InputShowcaseCard } from "./input-showcase-card";
 import { TabsShowcaseCard } from "./tabs-showcase-card";
+import { TextareaShowcaseCard } from "./textarea-showcase-card";
 import { ToggleShowcaseCard } from "./toggle-showcase-card";
 
 export type ComponentShowcase = {
@@ -49,6 +50,12 @@ export const COMPONENT_SHOWCASES = [
 		title: "Input",
 		description: "A hand-drawn Base UI input styled with shadcn conventions.",
 		Showcase: InputShowcaseCard,
+	},
+	{
+		slug: "textarea",
+		title: "Textarea",
+		description: "A hand-drawn textarea styled with shadcn conventions.",
+		Showcase: TextareaShowcaseCard,
 	},
 ] as const satisfies readonly ComponentShowcase[];
 
