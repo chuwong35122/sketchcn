@@ -3,6 +3,7 @@ import { ButtonShowcaseCard } from "./button-showcase-card";
 import { CardShowcaseCard } from "./card-showcase-card";
 import { DialogShowcaseCard } from "./dialog-showcase-card";
 import { InputShowcaseCard } from "./input-showcase-card";
+import { SwitchShowcaseCard } from "./switch-showcase-card";
 import { TabsShowcaseCard } from "./tabs-showcase-card";
 import { TextareaShowcaseCard } from "./textarea-showcase-card";
 import { ToggleShowcaseCard } from "./toggle-showcase-card";
@@ -38,6 +39,12 @@ export const COMPONENT_SHOWCASES = [
 		title: "Toggle",
 		description: "A pressable Base UI toggle styled with shadcn conventions.",
 		Showcase: ToggleShowcaseCard,
+	},
+	{
+		slug: "switch",
+		title: "Switch",
+		description: "A hand-drawn Base UI switch styled with shadcn conventions.",
+		Showcase: SwitchShowcaseCard,
 	},
 	{
 		slug: "tabs",
