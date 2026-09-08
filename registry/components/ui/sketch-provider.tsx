@@ -55,13 +55,25 @@ export function SketchProvider({
 }
 
 
+/**
+ * Draws a RoughJS outline into an `<svg>` overlaying the parent element.
+ *
+ * @param options RoughJS options plus `shape`, `opacity`, and `id`.
+ * `id` seeds the wobble and defaults to `useId()`. Because `useId()` shifts
+ * with tree position, pass a stable `id` when the drawn geometry must not
+ * change — shared shapes across instances, or visual regression snapshots.
+ * @returns The `ref` and `style` to spread onto the outline `<svg>`.
+ */
 export function useSketchOutline(options: SketchOutlineOptions = {}): SketchOutline {
-  const { opacity, shape = "rectangle", ...roughOptions } = options;
+  const { id, opacity, shape = "rectangle", ...roughOptions } = options;
   const theme = useSketch();
   const [svg, setSvg] = useState<SVGSVGElement | null>(null);
-  const instanceId = useId();
+  const fallbackId = useId();
 
-  const seed = useMemo(() => createSeed(theme.seed, instanceId), [instanceId, theme.seed]);
+  const seed = useMemo(
+    () => createSeed(theme.seed, id ?? fallbackId),
+    [fallbackId, id, theme.seed],
+  );
 
   useLayoutEffect(() => {
     const target = svg?.parentElement;

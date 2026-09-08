@@ -14,8 +14,9 @@ export const SketchContext = createContext<SketchTheme | null>(null);
 
 export type SketchShape = "rectangle" | "underline";
 
-export type SketchOutlineOptions = Partial<Options> & {
+export type SketchOutlineOptions = Omit<Partial<Options>, "seed"> & {
 	borderRadius?: number;
+	id?: string;
 	opacity?: number;
 	shape?: SketchShape;
 };
