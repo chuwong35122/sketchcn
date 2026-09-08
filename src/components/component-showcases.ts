@@ -2,6 +2,7 @@ import type { ComponentType } from "react";
 import { ButtonShowcaseCard } from "./button-showcase-card";
 import { CardShowcaseCard } from "./card-showcase-card";
 import { DialogShowcaseCard } from "./dialog-showcase-card";
+import { InputShowcaseCard } from "./input-showcase-card";
 import { TabsShowcaseCard } from "./tabs-showcase-card";
 import { ToggleShowcaseCard } from "./toggle-showcase-card";
 
@@ -42,6 +43,12 @@ export const COMPONENT_SHOWCASES = [
 		title: "Tabs",
 		description: "A hand-drawn Base UI tabs styled with shadcn conventions.",
 		Showcase: TabsShowcaseCard,
+	},
+	{
+		slug: "input",
+		title: "Input",
+		description: "A hand-drawn Base UI input styled with shadcn conventions.",
+		Showcase: InputShowcaseCard,
 	},
 ] as const satisfies readonly ComponentShowcase[];
 
