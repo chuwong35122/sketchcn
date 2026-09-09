@@ -20,7 +20,7 @@
 
 ## Components and Naming
 
-Use the regular shadcn component name and filename without project-specific prefixes or renames. For example, the button registry item and source must be named `button` and `button.tsx`—never `sketch-button.tsx`, `rough-button.tsx`, or another variant.
+Use the regular shadcn component name and filename without project-specific prefixes or renames. For example, the button registry item and source must be named `button` and `button.tsx`, never `sketch-button.tsx`, `rough-button.tsx`, or another variant.
 
 Registry components should use Base UI primitives, Tailwind utility classes, `class-variance-authority` for variants, and `cnfast` for class merging. Use `@boxicons/react` for icons and `@fontsource/patrick-hand` as the default font.
 
