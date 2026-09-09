@@ -34,9 +34,9 @@ function Home() {
 							<ArrowRight />
 						</Button>
 					</Link>
-					<Link to="/components/$name" params={{ name: "button" }}>
+					<Link to="/docs">
 						<Button size="lg" variant="outline">
-							Start with Button
+							Read the docs
 						</Button>
 					</Link>
 				</div>

@@ -157,3 +157,19 @@ body {
     }
   }
 }
+
+.shiki-block .shiki {
+  margin: 0;
+  background-color: transparent;
+  font: inherit;
+}
+
+.shiki-block .shiki,
+.shiki-block .shiki span {
+  color: var(--shiki-light);
+}
+
+.dark .shiki-block .shiki,
+.dark .shiki-block .shiki span {
+  color: var(--shiki-dark);
+}
