@@ -3,6 +3,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Button } from "../../../registry/components/ui/button";
 import { findComponentShowcase } from "../../components/component-showcases";
 import { InstallTabs } from "../../components/install-tabs";
+import { ShowcaseCard } from "../../components/showcase-card";
 
 export const Route = createFileRoute("/components/$name")({
 	loader: ({ params }) => {
@@ -33,9 +34,22 @@ function ComponentPage() {
 				<ArrowLeft />
 				All components
 			</Button>
-			<showcase.Showcase />
-			<InstallTabs name={showcase.slug} />
-			{showcase.Examples && <showcase.Examples />}
+			<section id="preview" className="scroll-mt-8">
+				<showcase.Showcase />
+			</section>
+			<section id="installation" className="scroll-mt-8">
+				<ShowcaseCard
+					title="Installation"
+					description={`Add ${showcase.title} with the shadcn CLI.`}
+				>
+					<InstallTabs name={showcase.slug} />
+				</ShowcaseCard>
+			</section>
+			{showcase.Examples && (
+				<section id="examples" className="scroll-mt-8">
+					<showcase.Examples />
+				</section>
+			)}
 		</div>
 	);
 }
