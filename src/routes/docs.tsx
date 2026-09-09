@@ -434,7 +434,7 @@ function CssVariableGallery() {
 
 function DocsPage() {
 	return (
-		<div className="min-h-screen bg-paper">
+		<div>
 			<div className="mx-auto flex w-full max-w-4xl flex-col gap-6 p-8">
 				<Button
 					variant="link"

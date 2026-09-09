@@ -36,7 +36,14 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body suppressHydrationWarning>
-				<SketchProvider>{children}</SketchProvider>
+				<SketchProvider>
+					<div
+						data-paper="graph"
+						className="relative isolate min-h-screen [--paper-opacity:0.25]"
+					>
+						{children}
+					</div>
+				</SketchProvider>
 				<TanStackDevtools
 					config={{
 						position: "bottom-right",
