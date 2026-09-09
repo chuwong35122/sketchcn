@@ -26,6 +26,42 @@ export type SketchOutline = {
 	style: CSSProperties;
 };
 
+/**
+ * Namespace for the `--sketch-*` custom properties a drawing reads.
+ *
+ * `"bg"` resolves `--sketch-bg-<name>` first and falls back to `--sketch-<name>`,
+ * so a background inherits shared wobble settings while keeping its own fill.
+ */
+export type SketchScope = "outline" | "bg";
+
+const CSS_NUMBER_OPTIONS = {
+	bowing: "bowing",
+	curveFitting: "curve-fitting",
+	curveStepCount: "curve-step-count",
+	curveTightness: "curve-tightness",
+	dashGap: "dash-gap",
+	dashOffset: "dash-offset",
+	fillWeight: "fill-weight",
+	hachureAngle: "hachure-angle",
+	hachureGap: "hachure-gap",
+	maxRandomnessOffset: "max-randomness-offset",
+	roughness: "roughness",
+	simplification: "simplification",
+	strokeWidth: "stroke-width",
+	zigzagOffset: "zigzag-offset",
+} as const;
+
+const CSS_STRING_OPTIONS = {
+	fill: "fill",
+	fillStyle: "fill-style",
+	stroke: "stroke",
+} as const;
+
+const CSS_BOOLEAN_OPTIONS = {
+	disableMultiStroke: "disable-multi-stroke",
+	preserveVertices: "preserve-vertices",
+} as const;
+
 export function createSeed(seed: number, instanceId: string): number {
 	let hash = seed;
 
@@ -37,27 +73,74 @@ export function createSeed(seed: number, instanceId: string): number {
 	return (hash >>> 0) % 2_147_483_647 || 1;
 }
 
-export function getCssSketchOptions(target: Element): Partial<Options> {
+export function getCssSketchOptions(
+	target: Element,
+	scope: SketchScope = "outline",
+): Partial<Options> {
 	const styles = getComputedStyle(target);
-	const bowing = readCssNumber(styles, "--sketch-bowing");
-	const roughness = readCssNumber(styles, "--sketch-roughness");
-	const stroke = styles.getPropertyValue("--sketch-stroke").trim();
-	const strokeWidth = readCssNumber(styles, "--sketch-stroke-width");
-	const disableMultiStroke = readCssBoolean(styles, "--sketch-disable-multi-stroke");
-	const preserveVertices = readCssBoolean(styles, "--sketch-preserve-vertices");
-	const fill = styles.getPropertyValue("--sketch-fill").trim();
-	const fillStyle = styles.getPropertyValue("--sketch-fill-style").trim();
+	const read = (name: string) => readScopedCssValue(styles, scope, name);
+	const options: Record<string, unknown> = {};
 
-	return {
-		...(bowing === undefined ? {} : { bowing }),
-		...(disableMultiStroke === undefined ? {} : { disableMultiStroke }),
-		...(fill === "" ? {} : { fill }),
-		...(fillStyle === "" ? {} : { fillStyle }),
-		...(roughness === undefined ? {} : { roughness }),
-		...(preserveVertices === undefined ? {} : { preserveVertices }),
-		...(stroke === "" ? {} : { stroke }),
-		...(strokeWidth === undefined ? {} : { strokeWidth }),
-	};
+	for (const [option, name] of Object.entries(CSS_NUMBER_OPTIONS)) {
+		const value = Number.parseFloat(read(name));
+
+		if (!Number.isNaN(value)) {
+			options[option] = value;
+		}
+	}
+
+	for (const [option, name] of Object.entries(CSS_STRING_OPTIONS)) {
+		const value = read(name);
+
+		if (value !== "") {
+			options[option] = value;
+		}
+	}
+
+	for (const [option, name] of Object.entries(CSS_BOOLEAN_OPTIONS)) {
+		const value = read(name);
+
+		if (value === "true" || value === "false") {
+			options[option] = value === "true";
+		}
+	}
+
+	return options as Partial<Options>;
+}
+
+export function getCssSketchSeed(
+	target: Element,
+	scope: SketchScope = "outline",
+): number | undefined {
+	/*
+		The seed is read as a quoted string because CSS minifiers round bare
+		numbers to six significant digits (20260828 ships as 20260800), which
+		would change every wobble between dev and production. Bare numbers are
+		still accepted for hand-written overrides that stay small.
+	*/
+	const raw = readScopedCssValue(getComputedStyle(target), scope, "seed").replace(
+		/^["']|["']$/g,
+		"",
+	);
+	const value = Number.parseFloat(raw);
+
+	if (Number.isNaN(value)) {
+		return undefined;
+	}
+
+	return value;
+}
+
+export function getCssMinStrokeWidth(target: Element, scope: SketchScope = "outline"): number {
+	const value = Number.parseFloat(
+		readScopedCssValue(getComputedStyle(target), scope, "min-stroke-width"),
+	);
+
+	if (Number.isNaN(value)) {
+		return MIN_STROKE_WIDTH;
+	}
+
+	return value;
 }
 
 export function getBorderRadius(target: Element): number {
@@ -123,26 +206,18 @@ export function createUnderlinePath(
 	return `M ${strokeInset} ${bottom} H ${width - strokeInset}`;
 }
 
-function readCssNumber(styles: CSSStyleDeclaration, property: string): number | undefined {
-	const value = Number.parseFloat(styles.getPropertyValue(property));
+function readScopedCssValue(
+	styles: CSSStyleDeclaration,
+	scope: SketchScope,
+	name: string,
+): string {
+	if (scope === "bg") {
+		const scoped = styles.getPropertyValue(`--sketch-bg-${name}`).trim();
 
-	if (Number.isNaN(value)) {
-		return undefined;
+		if (scoped !== "") {
+			return scoped;
+		}
 	}
 
-	return value;
-}
-
-function readCssBoolean(styles: CSSStyleDeclaration, property: string): boolean | undefined {
-	const value = styles.getPropertyValue(property).trim();
-
-	if (value === "true") {
-		return true;
-	}
-
-	if (value === "false") {
-		return false;
-	}
-
-	return undefined;
+	return styles.getPropertyValue(`--sketch-${name}`).trim();
 }

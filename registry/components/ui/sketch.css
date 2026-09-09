@@ -1,12 +1,26 @@
 :root {
+  --sketch-seed: "20260828";
   --sketch-bowing: 1.4;
   --sketch-roughness: 1.1;
   --sketch-stroke: currentColor;
   --sketch-stroke-width: 1.6;
+  --sketch-min-stroke-width: 1;
   --sketch-disable-multi-stroke: true;
   --sketch-preserve-vertices: true;
   --sketch-fill-style: solid;
+
+  --sketch-bg-stroke: transparent;
+  --sketch-bg-fill: currentColor;
+  --sketch-bg-fill-style: hachure;
+  --sketch-bg-fill-weight: 0.4;
+  --sketch-bg-hachure-gap: 4;
+  --sketch-bg-opacity: 0.5;
+
   --card-pattern: #9c92ac;
+}
+
+[data-sketch-bg] {
+  opacity: var(--sketch-bg-opacity, 1);
 }
 
 [data-sketch-outline] path,
