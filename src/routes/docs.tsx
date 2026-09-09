@@ -15,8 +15,8 @@ export function App({ children }: { children: React.ReactNode }) {
   return <SketchProvider>{children}</SketchProvider>;
 }`;
 
-const PROVIDER_OPTIONS_SNIPPET = `<SketchProvider seed={1234} options={{ roughness: 2, bowing: 2 }}>
-  {children}
+const PROVIDER_OPTIONS_SNIPPET = `<SketchProvider seed={1234}>
+  <div className="[--sketch-roughness:2] [--sketch-bowing:2]">{children}</div>
 </SketchProvider>`;
 
 const OUTLINE_SNIPPET = `import { useSketchOutline } from "@/components/ui/sketch-provider";
@@ -66,13 +66,6 @@ const PROVIDER_PROPS = [
 		name: "children",
 		type: "ReactNode",
 		description: "The tree that can read sketch settings.",
-	},
-	{
-		name: "options",
-		type: "Partial<Options>",
-		cssVariable: "--sketch-*",
-		description:
-			"RoughJS options applied to every sketch drawing. Lowest priority: CSS variables and per-hook options win.",
 	},
 	{
 		name: "seed",
@@ -342,7 +335,7 @@ function DocsPage() {
 				<DocsSection
 					id="sketch-provider"
 					title="SketchProvider"
-					description="Shares the RoughJS options and the seed with every sketch component below it."
+					description="Shares the seed with every sketch component below it. Every other drawing option comes from the --sketch-* CSS variables."
 				>
 					<DocsSection.Reference rows={PROVIDER_PROPS} />
 					<DocsSection.Block label="Draw the whole page rougher">
@@ -351,7 +344,7 @@ function DocsPage() {
 					<DocsSection.Block label="Option precedence, lowest to highest">
 						<p className="text-muted-foreground text-sm">
 							{
-								"Provider options, then CSS variables read from the element, then the options passed to the hook. The seed is the exception. It comes from --sketch-seed when the element sets one, otherwise from the provider, and is always mixed with the hook id."
+								"CSS variables read from the element, then the options passed to the hook. The seed is the exception. It comes from --sketch-seed when the element sets one, otherwise from the provider, and is always mixed with the hook id."
 							}
 						</p>
 					</DocsSection.Block>

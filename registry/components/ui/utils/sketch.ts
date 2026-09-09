@@ -6,7 +6,6 @@ export const DEFAULT_STROKE_WIDTH = 1.6;
 export const MIN_STROKE_WIDTH = 1;
 
 export type SketchTheme = {
-	options: Partial<Options>;
 	seed: number;
 };
 

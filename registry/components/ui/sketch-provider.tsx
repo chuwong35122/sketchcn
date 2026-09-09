@@ -11,7 +11,6 @@ import {
   useState,
 } from "react";
 import rough from "roughjs";
-import type { Options } from "roughjs/bin/core";
 import {
   createRoundedRectanglePath,
   createSeed,
@@ -33,25 +32,13 @@ import {
 
 export type SketchProviderProps = {
   children: ReactNode;
-  options?: Partial<Options>;
   seed?: number;
 };
 
 export type { SketchOutline, SketchOutlineOptions, SketchScope, SketchShape } from "./utils/sketch";
 
-export function SketchProvider({
-  children,
-  options,
-  seed = DEFAULT_SEED,
-}: SketchProviderProps) {
-
-  const value = useMemo(
-    () => ({
-      options: options as Partial<Options>,
-      seed,
-    }),
-    [options, seed],
-  );
+export function SketchProvider({ children, seed = DEFAULT_SEED }: SketchProviderProps) {
+  const value = useMemo(() => ({ seed }), [seed]);
 
   return <SketchContext.Provider value={value}>{children}</SketchContext.Provider>;
 }
@@ -94,7 +81,6 @@ export function useSketchOutline(
 
       const drawing = rough.svg(svg);
       const drawingOptions = {
-        ...theme.options,
         ...getCssSketchOptions(target, scope),
         ...roughOptions,
         seed: createSeed(getCssSketchSeed(target, scope) ?? theme.seed, instanceId),
