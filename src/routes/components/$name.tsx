@@ -35,6 +35,7 @@ function ComponentPage() {
 			</Button>
 			<showcase.Showcase />
 			<InstallTabs name={showcase.slug} />
+			{showcase.Examples && <showcase.Examples />}
 		</div>
 	);
 }

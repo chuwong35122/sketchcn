@@ -3,6 +3,8 @@ import { ButtonShowcaseCard } from "./button-showcase-card";
 import { CardShowcaseCard } from "./card-showcase-card";
 import { DialogShowcaseCard } from "./dialog-showcase-card";
 import { InputShowcaseCard } from "./input-showcase-card";
+import { SketchProviderExamples } from "./sketch-provider-examples";
+import { SketchProviderShowcaseCard } from "./sketch-provider-showcase-card";
 import { SwitchShowcaseCard } from "./switch-showcase-card";
 import { TabsShowcaseCard } from "./tabs-showcase-card";
 import { TextareaShowcaseCard } from "./textarea-showcase-card";
@@ -13,9 +15,18 @@ export type ComponentShowcase = {
 	title: string;
 	description: string;
 	Showcase: ComponentType;
+	Examples?: ComponentType;
 };
 
 export const COMPONENT_SHOWCASES = [
+	{
+		slug: "sketch-provider",
+		title: "Sketch Provider",
+		description:
+			"The RoughJS provider and hooks every Sketchcn component draws through.",
+		Showcase: SketchProviderShowcaseCard,
+		Examples: SketchProviderExamples,
+	},
 	{
 		slug: "button",
 		title: "Button",
@@ -66,6 +77,8 @@ export const COMPONENT_SHOWCASES = [
 	},
 ] as const satisfies readonly ComponentShowcase[];
 
-export function findComponentShowcase(slug: string) {
+export function findComponentShowcase(
+	slug: string,
+): ComponentShowcase | undefined {
 	return COMPONENT_SHOWCASES.find((showcase) => showcase.slug === slug);
 }
