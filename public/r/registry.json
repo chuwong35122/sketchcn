@@ -114,8 +114,35 @@
 			"title": "Toggle",
 			"description": "A pressable Base UI toggle styled with shadcn conventions.",
 			"dependencies": ["@base-ui/react", "class-variance-authority", "cnfast"],
-			"registryDependencies": ["default"],
+			"registryDependencies": ["default", "sketch-provider"],
 			"files": [{ "path": "registry/components/ui/toggle.tsx", "type": "registry:ui" }]
+		},
+		{
+			"name": "switch",
+			"type": "registry:ui",
+			"title": "Switch",
+			"description": "A hand-drawn Base UI switch styled with shadcn conventions.",
+			"dependencies": ["@base-ui/react", "class-variance-authority", "cnfast"],
+			"registryDependencies": ["default", "sketch-provider"],
+			"files": [{ "path": "registry/components/ui/switch.tsx", "type": "registry:ui" }]
+		},
+		{
+			"name": "input",
+			"type": "registry:ui",
+			"title": "Input",
+			"description": "A hand-drawn Base UI input styled with shadcn conventions.",
+			"dependencies": ["@base-ui/react", "cnfast"],
+			"registryDependencies": ["default", "sketch-provider"],
+			"files": [{ "path": "registry/components/ui/input.tsx", "type": "registry:ui" }]
+		},
+		{
+			"name": "textarea",
+			"type": "registry:ui",
+			"title": "Textarea",
+			"description": "A hand-drawn textarea styled with shadcn conventions.",
+			"dependencies": ["cnfast"],
+			"registryDependencies": ["default", "sketch-provider"],
+			"files": [{ "path": "registry/components/ui/textarea.tsx", "type": "registry:ui" }]
 		},
 		{
 			"name": "dialog",
@@ -134,6 +161,15 @@
 			"dependencies": ["cnfast"],
 			"registryDependencies": ["default", "sketch-provider"],
 			"files": [{ "path": "registry/components/ui/card.tsx", "type": "registry:ui" }]
+		},
+		{
+			"name": "tabs",
+			"type": "registry:ui",
+			"title": "Tabs",
+			"description": "A hand-drawn Base UI tabs styled with shadcn conventions.",
+			"dependencies": ["@base-ui/react", "class-variance-authority", "cnfast"],
+			"registryDependencies": ["default", "sketch-provider"],
+			"files": [{ "path": "registry/components/ui/tabs.tsx", "type": "registry:ui" }]
 		}
 	]
 }

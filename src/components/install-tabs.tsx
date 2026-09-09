@@ -5,6 +5,7 @@ import {
 	TabsList,
 	TabsTrigger,
 } from "../../registry/components/ui/tabs";
+import { highlight } from "../lib/highlighter";
 import { CopyButton } from "./copy-button";
 
 const REGISTRY_URL = "https://sketchcn.chuwii.com/r";
@@ -55,9 +56,11 @@ function CommandBox({ command }: { command: string }) {
 
 	return (
 		<div className="relative isolate flex items-center justify-between gap-2 rounded-lg bg-muted/40 px-3 py-2">
-			<code className="overflow-x-auto whitespace-nowrap font-mono text-sm">
-				{command}
-			</code>
+			<div
+				className="shiki-block overflow-x-auto font-mono text-sm"
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: Shiki output built from a local literal, never user input.
+				dangerouslySetInnerHTML={{ __html: highlight(command, "bash") }}
+			/>
 			<CopyButton value={command} />
 			<svg
 				aria-hidden="true"

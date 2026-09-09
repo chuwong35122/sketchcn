@@ -11,7 +11,6 @@ import {
   useState,
 } from "react";
 import rough from "roughjs";
-import type { Options } from "roughjs/bin/core";
 import {
   createRoundedRectanglePath,
   createSeed,
@@ -20,36 +19,26 @@ import {
   DEFAULT_STROKE_WIDTH,
   getBorderRadius,
   getCssSketchOptions,
+  getCssSketchSeed,
   getPaddingBoxSize,
   MIN_STROKE_WIDTH,
   SketchContext,
   type SketchOutline,
   type SketchOutlineOptions,
+  type SketchScope,
   type SketchShape,
   type SketchTheme,
 } from "./utils/sketch";
 
 export type SketchProviderProps = {
   children: ReactNode;
-  options?: Partial<Options>;
   seed?: number;
 };
 
-export type { SketchOutline, SketchOutlineOptions, SketchShape } from "./utils/sketch";
+export type { SketchOutline, SketchOutlineOptions, SketchScope, SketchShape } from "./utils/sketch";
 
-export function SketchProvider({
-  children,
-  options,
-  seed = DEFAULT_SEED,
-}: SketchProviderProps) {
-
-  const value = useMemo(
-    () => ({
-      options: options as Partial<Options>,
-      seed,
-    }),
-    [options, seed],
-  );
+export function SketchProvider({ children, seed = DEFAULT_SEED }: SketchProviderProps) {
+  const value = useMemo(() => ({ seed }), [seed]);
 
   return <SketchContext.Provider value={value}>{children}</SketchContext.Provider>;
 }
@@ -61,19 +50,19 @@ export function SketchProvider({
  * @param options RoughJS options plus `shape`, `opacity`, and `id`.
  * `id` seeds the wobble and defaults to `useId()`. Because `useId()` shifts
  * with tree position, pass a stable `id` when the drawn geometry must not
- * change — shared shapes across instances, or visual regression snapshots.
+ * change, such as shared shapes across instances or visual regression
+ * snapshots.
  * @returns The `ref` and `style` to spread onto the outline `<svg>`.
  */
-export function useSketchOutline(options: SketchOutlineOptions = {}): SketchOutline {
+export function useSketchOutline(
+  options: SketchOutlineOptions = {},
+  scope: SketchScope = "outline",
+): SketchOutline {
   const { id, opacity, shape = "rectangle", ...roughOptions } = options;
   const theme = useSketch();
   const [svg, setSvg] = useState<SVGSVGElement | null>(null);
   const fallbackId = useId();
-
-  const seed = useMemo(
-    () => createSeed(theme.seed, id ?? fallbackId),
-    [fallbackId, id, theme.seed],
-  );
+  const instanceId = id ?? fallbackId;
 
   useLayoutEffect(() => {
     const target = svg?.parentElement;
@@ -92,10 +81,9 @@ export function useSketchOutline(options: SketchOutlineOptions = {}): SketchOutl
 
       const drawing = rough.svg(svg);
       const drawingOptions = {
-        ...theme.options,
-        ...getCssSketchOptions(target),
+        ...getCssSketchOptions(target, scope),
         ...roughOptions,
-        seed,
+        seed: createSeed(getCssSketchSeed(target, scope) ?? theme.seed, instanceId),
       };
       const strokeWidth = Math.max(
         MIN_STROKE_WIDTH,
@@ -127,7 +115,7 @@ export function useSketchOutline(options: SketchOutlineOptions = {}): SketchOutl
       attributeObserver.disconnect();
       observer.disconnect();
     };
-  }, [seed, shape, svg]);
+  }, [instanceId, scope, shape, svg, theme.seed]);
 
   return {
     ref: setSvg,
@@ -146,15 +134,7 @@ export function useSketchOutline(options: SketchOutlineOptions = {}): SketchOutl
 }
 
 export function useSketchBg(options: SketchOutlineOptions = {}): SketchOutline {
-  return useSketchOutline({
-    fill: "currentColor",
-    fillStyle: "hachure",
-    fillWeight: 0.4,
-    hachureGap: 4,
-    stroke: "transparent",
-    opacity: 0.5,
-    ...options,
-  });
+  return useSketchOutline(options, "bg");
 }
 
 function getSketchPath(

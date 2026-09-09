@@ -11,7 +11,7 @@ export function InputShowcaseCard() {
 				<Input placeholder="Sketch something" />
 			</ShowcaseCard.Row>
 			<ShowcaseCard.Row label="Types">
-				<Input type="email" placeholder="hello@sketchcn.dev" />
+				<Input type="email" placeholder="hello@chuwii.com" />
 				<Input type="password" placeholder="Password" />
 				<Input type="file" />
 			</ShowcaseCard.Row>
