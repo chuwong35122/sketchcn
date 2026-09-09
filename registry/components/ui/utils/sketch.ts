@@ -35,19 +35,11 @@ export type SketchScope = "outline" | "bg";
 
 const CSS_NUMBER_OPTIONS = {
 	bowing: "bowing",
-	curveFitting: "curve-fitting",
-	curveStepCount: "curve-step-count",
-	curveTightness: "curve-tightness",
-	dashGap: "dash-gap",
-	dashOffset: "dash-offset",
 	fillWeight: "fill-weight",
 	hachureAngle: "hachure-angle",
 	hachureGap: "hachure-gap",
-	maxRandomnessOffset: "max-randomness-offset",
 	roughness: "roughness",
-	simplification: "simplification",
 	strokeWidth: "stroke-width",
-	zigzagOffset: "zigzag-offset",
 } as const;
 
 const CSS_STRING_OPTIONS = {
@@ -125,18 +117,6 @@ export function getCssSketchSeed(
 
 	if (Number.isNaN(value)) {
 		return undefined;
-	}
-
-	return value;
-}
-
-export function getCssMinStrokeWidth(target: Element, scope: SketchScope = "outline"): number {
-	const value = Number.parseFloat(
-		readScopedCssValue(getComputedStyle(target), scope, "min-stroke-width"),
-	);
-
-	if (Number.isNaN(value)) {
-		return MIN_STROKE_WIDTH;
 	}
 
 	return value;

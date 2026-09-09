@@ -1,5 +1,6 @@
 import { ArrowLeft } from "@boxicons/react";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import cn from "cnfast";
 import { Button } from "../../registry/components/ui/button";
 import { CodeBlock } from "../components/code-block";
 import type { DocsReferenceRow } from "../components/docs-section";
@@ -185,13 +186,6 @@ const CSS_VARIABLES = [
 		description: "Stroke width in pixels.",
 	},
 	{
-		name: "--sketch-min-stroke-width",
-		type: "number",
-		defaultValue: "1",
-		description:
-			"Floor applied to the stroke width, which also insets the path so the wobble stays inside the box.",
-	},
-	{
 		name: "--sketch-disable-multi-stroke",
 		type: '"true" | "false"',
 		defaultValue: "true",
@@ -232,47 +226,6 @@ const CSS_VARIABLES = [
 		description: "Angle of the hachure lines in degrees.",
 	},
 	{
-		name: "--sketch-max-randomness-offset",
-		type: "number",
-		description: "Upper bound on how far a point may be displaced.",
-	},
-	{
-		name: "--sketch-curve-fitting",
-		type: "number",
-		description: "How closely curves follow the original shape.",
-	},
-	{
-		name: "--sketch-curve-tightness",
-		type: "number",
-		description: "Tension of the curve through its control points.",
-	},
-	{
-		name: "--sketch-curve-step-count",
-		type: "number",
-		description: "Number of segments used to draw a curve.",
-	},
-	{
-		name: "--sketch-simplification",
-		type: "number",
-		description:
-			"Drops points from the path, where 0 keeps them all and 1 is the flattest.",
-	},
-	{
-		name: "--sketch-dash-offset",
-		type: "number",
-		description: "Dash length for the dashed fill style.",
-	},
-	{
-		name: "--sketch-dash-gap",
-		type: "number",
-		description: "Gap between dashes for the dashed fill style.",
-	},
-	{
-		name: "--sketch-zigzag-offset",
-		type: "number",
-		description: "Zigzag amplitude for the zigzag-line fill style.",
-	},
-	{
 		name: "--sketch-dash",
 		type: "string",
 		defaultValue: "none",
@@ -293,6 +246,191 @@ const CSS_VARIABLES = [
 		description: "CSS fill-opacity on the drawn path, transitioned over 150ms.",
 	},
 ] as const satisfies readonly DocsReferenceRow[];
+
+type CssVariableExample = {
+	value: string;
+	className: string;
+	id?: string;
+};
+
+type CssVariableRow = {
+	name: string;
+	examples: readonly [CssVariableExample, CssVariableExample];
+};
+
+const HACHURE_FILL =
+	"[--sketch-fill:var(--primary)] [--sketch-fill-style:hachure]";
+
+const CSS_VARIABLE_EXAMPLES: readonly CssVariableRow[] = [
+	{
+		name: "--sketch-seed",
+		examples: [
+			{ value: "7", className: "[--sketch-seed:7]", id: "seed-example" },
+			{ value: "99", className: "[--sketch-seed:99]", id: "seed-example" },
+		],
+	},
+	{
+		name: "--sketch-roughness",
+		examples: [
+			{ value: "0.4", className: "[--sketch-roughness:0.4]" },
+			{ value: "3", className: "[--sketch-roughness:3]" },
+		],
+	},
+	{
+		name: "--sketch-bowing",
+		examples: [
+			{ value: "0", className: "[--sketch-bowing:0]" },
+			{ value: "6", className: "[--sketch-bowing:6]" },
+		],
+	},
+	{
+		name: "--sketch-stroke",
+		examples: [
+			{
+				value: "var(--primary)",
+				className: "[--sketch-stroke:var(--primary)]",
+			},
+			{
+				value: "var(--destructive)",
+				className: "[--sketch-stroke:var(--destructive)]",
+			},
+		],
+	},
+	{
+		name: "--sketch-stroke-width",
+		examples: [
+			{ value: "1", className: "[--sketch-stroke-width:1]" },
+			{ value: "4", className: "[--sketch-stroke-width:4]" },
+		],
+	},
+	{
+		name: "--sketch-disable-multi-stroke",
+		examples: [
+			{ value: "true", className: "[--sketch-disable-multi-stroke:true]" },
+			{ value: "false", className: "[--sketch-disable-multi-stroke:false]" },
+		],
+	},
+	{
+		name: "--sketch-preserve-vertices",
+		examples: [
+			{
+				value: "true",
+				className: "[--sketch-preserve-vertices:true] [--sketch-roughness:2.4]",
+			},
+			{
+				value: "false",
+				className:
+					"[--sketch-preserve-vertices:false] [--sketch-roughness:2.4]",
+			},
+		],
+	},
+	{
+		name: "--sketch-fill",
+		examples: [
+			{
+				value: "var(--primary)",
+				className: "text-primary-foreground [--sketch-fill:var(--primary)]",
+			},
+			{
+				value: "var(--destructive)",
+				className: "text-primary-foreground [--sketch-fill:var(--destructive)]",
+			},
+		],
+	},
+	{
+		name: "--sketch-fill-style",
+		examples: [
+			{
+				value: "solid",
+				className:
+					"text-primary-foreground [--sketch-fill:var(--primary)] [--sketch-fill-style:solid]",
+			},
+			{ value: "hachure", className: HACHURE_FILL },
+		],
+	},
+	{
+		name: "--sketch-fill-weight",
+		examples: [
+			{ value: "0.5", className: `${HACHURE_FILL} [--sketch-fill-weight:0.5]` },
+			{ value: "2.5", className: `${HACHURE_FILL} [--sketch-fill-weight:2.5]` },
+		],
+	},
+	{
+		name: "--sketch-hachure-gap",
+		examples: [
+			{ value: "3", className: `${HACHURE_FILL} [--sketch-hachure-gap:3]` },
+			{ value: "10", className: `${HACHURE_FILL} [--sketch-hachure-gap:10]` },
+		],
+	},
+	{
+		name: "--sketch-hachure-angle",
+		examples: [
+			{ value: "0", className: `${HACHURE_FILL} [--sketch-hachure-angle:0]` },
+			{ value: "90", className: `${HACHURE_FILL} [--sketch-hachure-angle:90]` },
+		],
+	},
+	{
+		name: "--sketch-dash",
+		examples: [
+			{ value: "6 4", className: "[--sketch-dash:6_4]" },
+			{ value: "2 10", className: "[--sketch-dash:2_10]" },
+		],
+	},
+	{
+		name: "--sketch-dash-animation",
+		examples: [
+			{
+				value: "sketch-dash-boil 1s steps(2) infinite",
+				className:
+					"[--sketch-dash:6_4] [--sketch-dash-animation:sketch-dash-boil_1s_steps(2)_infinite]",
+			},
+			{
+				value: "sketch-dash-alternate 1s steps(2) infinite",
+				className:
+					"[--sketch-dash:5_5] [--sketch-dash-animation:sketch-dash-alternate_1s_steps(2)_infinite]",
+			},
+		],
+	},
+	{
+		name: "--sketch-fill-opacity",
+		examples: [
+			{
+				value: "0.2",
+				className: "[--sketch-fill:var(--primary)] [--sketch-fill-opacity:0.2]",
+			},
+			{
+				value: "1",
+				className:
+					"text-primary-foreground [--sketch-fill:var(--primary)] [--sketch-fill-opacity:1]",
+			},
+		],
+	},
+];
+
+function CssVariableGallery() {
+	return (
+		<div className="grid gap-5 sm:grid-cols-2">
+			{CSS_VARIABLE_EXAMPLES.map((variable) => (
+				<div key={variable.name} className="flex flex-col gap-2">
+					<span className="font-mono text-muted-foreground text-xs">
+						{variable.name}
+					</span>
+					<div className="grid grid-cols-2 gap-3">
+						{variable.examples.map((example) => (
+							<OutlinePreview
+								key={example.value}
+								id={example.id}
+								className={cn("text-center", example.className)}
+							>
+								<span className="font-mono text-xs">{example.value}</span>
+							</OutlinePreview>
+						))}
+					</div>
+				</div>
+			))}
+		</div>
+	);
+}
 
 function DocsPage() {
 	return (
@@ -406,6 +544,9 @@ function DocsPage() {
 					description="sketch.css ships defaults on :root, and any element can override them for its own outline."
 				>
 					<DocsSection.Reference rows={CSS_VARIABLES} />
+					<DocsSection.Block label="Two values, side by side">
+						<CssVariableGallery />
+					</DocsSection.Block>
 					<DocsSection.Block label="Override on a subtree">
 						<CodeBlock code={CSS_VARIABLES_SNIPPET} />
 					</DocsSection.Block>

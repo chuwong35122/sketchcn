@@ -18,10 +18,10 @@ import {
   DEFAULT_SEED,
   DEFAULT_STROKE_WIDTH,
   getBorderRadius,
-  getCssMinStrokeWidth,
   getCssSketchOptions,
   getCssSketchSeed,
   getPaddingBoxSize,
+  MIN_STROKE_WIDTH,
   SketchContext,
   type SketchOutline,
   type SketchOutlineOptions,
@@ -86,7 +86,7 @@ export function useSketchOutline(
         seed: createSeed(getCssSketchSeed(target, scope) ?? theme.seed, instanceId),
       };
       const strokeWidth = Math.max(
-        getCssMinStrokeWidth(target, scope),
+        MIN_STROKE_WIDTH,
         drawingOptions.strokeWidth ?? DEFAULT_STROKE_WIDTH,
       );
       const path = getSketchPath(shape, target, width, height, strokeWidth);
