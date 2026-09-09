@@ -440,10 +440,12 @@ function DocsPage() {
 					variant="link"
 					size="sm"
 					className="w-fit px-0"
-					render={<Link to="/components" />}
+					render={
+						<Link to="/components/$name" params={{ name: "sketch-provider" }} />
+					}
 				>
 					<ArrowLeft />
-					All components
+					Sketch Provider
 				</Button>
 				<header className="flex flex-col gap-2">
 					<h1 className="text-4xl">Sketch Provider</h1>

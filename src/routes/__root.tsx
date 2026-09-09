@@ -1,9 +1,13 @@
+import { Github } from "@boxicons/react";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
+import { Button } from "../../registry/components/ui/button";
 import { SketchProvider } from "../../registry/components/ui/sketch-provider";
 import appCss from "../styles.css?url";
+
+const GITHUB_URL = "https://github.com/chuwong35122/sketchcn";
 
 export const Route = createRootRoute({
 	head: () => ({
@@ -41,6 +45,15 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 						data-paper="graph"
 						className="relative isolate min-h-screen [--paper-opacity:0.25]"
 					>
+						<Button
+							variant="ghost"
+							size="icon"
+							aria-label="Sketchcn on GitHub"
+							className="fixed top-4 right-4 z-50"
+							render={<a href={GITHUB_URL} target="_blank" rel="noreferrer" />}
+						>
+							<Github />
+						</Button>
 						{children}
 					</div>
 				</SketchProvider>
