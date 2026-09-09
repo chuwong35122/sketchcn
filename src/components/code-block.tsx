@@ -1,4 +1,4 @@
-import cn from "cnfast";
+import { cn } from "cn";
 import { useSketchOutline } from "../../registry/components/ui/sketch-provider";
 import { type CodeLanguage, highlight } from "../lib/highlighter";
 import { CopyButton } from "./copy-button";

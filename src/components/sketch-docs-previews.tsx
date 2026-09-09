@@ -1,4 +1,4 @@
-import cn from "cnfast";
+import { cn } from "cn";
 import type { ReactNode } from "react";
 import type { SketchOutlineOptions } from "../../registry/components/ui/sketch-provider";
 import {

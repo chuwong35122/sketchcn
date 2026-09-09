@@ -1,5 +1,5 @@
 import { Check, Copy } from "@boxicons/react";
-import cn from "cnfast";
+import { cn } from "cn";
 import { useState } from "react";
 import { Button } from "../../registry/components/ui/button";
 

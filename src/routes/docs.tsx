@@ -1,6 +1,6 @@
 import { ArrowLeft } from "@boxicons/react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import cn from "cnfast";
+import { cn } from "cn";
 import { Button } from "../../registry/components/ui/button";
 import { CodeBlock } from "../components/code-block";
 import type { DocsReferenceRow } from "../components/docs-section";

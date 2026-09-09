@@ -2,7 +2,7 @@
 
 import * as React from "react"
 
-import cn from "cnfast"
+import { cn } from "cn"
 import { useSketchOutline } from "./sketch-provider"
 
 const CARD_VARIANTS = [

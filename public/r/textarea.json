@@ -4,7 +4,7 @@
   "title": "Textarea",
   "description": "A hand-drawn textarea styled with shadcn conventions.",
   "dependencies": [
-    "cnfast"
+    "cn"
   ],
   "registryDependencies": [
     "default",
@@ -13,7 +13,7 @@
   "files": [
     {
       "path": "registry/components/ui/textarea.tsx",
-      "content": "\"use client\"\n\nimport cn from \"cnfast\"\nimport type * as React from \"react\"\nimport { useSketchOutline } from \"./sketch-provider\"\n\nfunction Textarea({ className, ...props }: React.ComponentProps<\"textarea\">) {\n  const sketchOutline = useSketchOutline()\n\n  return (\n    <div\n      data-slot=\"textarea-wrapper\"\n      className=\"relative isolate w-full rounded-lg text-input transition-colors has-aria-invalid:text-destructive has-focus-visible:text-ring [&>[data-sketch-outline]]:-z-10 [--sketch-stroke:currentColor]\"\n    >\n      <textarea\n        data-slot=\"textarea\"\n        className={cn(\n          \"block field-sizing-content min-h-16 w-full rounded-lg border border-transparent bg-transparent px-2.5 py-2 text-base text-foreground transition-colors outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 md:text-sm\",\n          className\n        )}\n        {...props}\n      />\n      <svg\n        aria-hidden=\"true\"\n        data-sketch-outline\n        ref={sketchOutline.ref}\n        style={sketchOutline.style}\n      />\n    </div>\n  )\n}\n\nexport { Textarea }\n",
+      "content": "\"use client\"\n\nimport { cn } from \"cn\"\nimport type * as React from \"react\"\nimport { useSketchOutline } from \"./sketch-provider\"\n\nfunction Textarea({ className, ...props }: React.ComponentProps<\"textarea\">) {\n  const sketchOutline = useSketchOutline()\n\n  return (\n    <div\n      data-slot=\"textarea-wrapper\"\n      className=\"relative isolate w-full rounded-lg text-input transition-colors has-aria-invalid:text-destructive has-focus-visible:text-ring [&>[data-sketch-outline]]:-z-10 [--sketch-stroke:currentColor]\"\n    >\n      <textarea\n        data-slot=\"textarea\"\n        className={cn(\n          \"block field-sizing-content min-h-16 w-full rounded-lg border border-transparent bg-transparent px-2.5 py-2 text-base text-foreground transition-colors outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50 md:text-sm\",\n          className\n        )}\n        {...props}\n      />\n      <svg\n        aria-hidden=\"true\"\n        data-sketch-outline\n        ref={sketchOutline.ref}\n        style={sketchOutline.style}\n      />\n    </div>\n  )\n}\n\nexport { Textarea }\n",
       "type": "registry:ui"
     }
   ],

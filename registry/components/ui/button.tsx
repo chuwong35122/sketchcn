@@ -1,6 +1,6 @@
 import { Button as ButtonPrimitive } from "@base-ui/react/button"
 import { cva, type VariantProps } from "class-variance-authority"
-import cn from "cnfast"
+import { cn } from "cn"
 import { useSketchBg, useSketchOutline } from "./sketch-provider"
 
 const buttonVariants = cva(

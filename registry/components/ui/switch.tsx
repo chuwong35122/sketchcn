@@ -2,7 +2,7 @@
 
 import { Switch as SwitchPrimitive } from "@base-ui/react/switch"
 import { cva, type VariantProps } from "class-variance-authority"
-import cn from "cnfast"
+import { cn } from "cn"
 import { useSketchOutline } from "./sketch-provider"
 
 const switchVariants = cva(

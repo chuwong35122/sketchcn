@@ -104,7 +104,7 @@
 			"type": "registry:ui",
 			"title": "Button",
 			"description": "A hand-drawn Base UI button styled with shadcn conventions.",
-			"dependencies": ["@base-ui/react", "@boxicons/react", "@fontsource/patrick-hand", "class-variance-authority", "cnfast"],
+			"dependencies": ["@base-ui/react", "@boxicons/react", "@fontsource/patrick-hand", "class-variance-authority", "cn"],
 			"registryDependencies": ["default", "sketch-provider"],
 			"files": [{ "path": "registry/components/ui/button.tsx", "type": "registry:ui" }]
 		},
@@ -113,7 +113,7 @@
 			"type": "registry:ui",
 			"title": "Toggle",
 			"description": "A pressable Base UI toggle styled with shadcn conventions.",
-			"dependencies": ["@base-ui/react", "class-variance-authority", "cnfast"],
+			"dependencies": ["@base-ui/react", "class-variance-authority", "cn"],
 			"registryDependencies": ["default", "sketch-provider"],
 			"files": [{ "path": "registry/components/ui/toggle.tsx", "type": "registry:ui" }]
 		},
@@ -122,7 +122,7 @@
 			"type": "registry:ui",
 			"title": "Switch",
 			"description": "A hand-drawn Base UI switch styled with shadcn conventions.",
-			"dependencies": ["@base-ui/react", "class-variance-authority", "cnfast"],
+			"dependencies": ["@base-ui/react", "class-variance-authority", "cn"],
 			"registryDependencies": ["default", "sketch-provider"],
 			"files": [{ "path": "registry/components/ui/switch.tsx", "type": "registry:ui" }]
 		},
@@ -131,7 +131,7 @@
 			"type": "registry:ui",
 			"title": "Input",
 			"description": "A hand-drawn Base UI input styled with shadcn conventions.",
-			"dependencies": ["@base-ui/react", "cnfast"],
+			"dependencies": ["@base-ui/react", "cn"],
 			"registryDependencies": ["default", "sketch-provider"],
 			"files": [{ "path": "registry/components/ui/input.tsx", "type": "registry:ui" }]
 		},
@@ -140,7 +140,7 @@
 			"type": "registry:ui",
 			"title": "Textarea",
 			"description": "A hand-drawn textarea styled with shadcn conventions.",
-			"dependencies": ["cnfast"],
+			"dependencies": ["cn"],
 			"registryDependencies": ["default", "sketch-provider"],
 			"files": [{ "path": "registry/components/ui/textarea.tsx", "type": "registry:ui" }]
 		},
@@ -149,7 +149,7 @@
 			"type": "registry:ui",
 			"title": "Dialog",
 			"description": "A hand-drawn Base UI dialog styled with shadcn conventions.",
-			"dependencies": ["@base-ui/react", "@boxicons/react", "cnfast"],
+			"dependencies": ["@base-ui/react", "@boxicons/react", "cn"],
 			"registryDependencies": ["default", "sketch-provider", "button"],
 			"files": [{ "path": "registry/components/ui/dialog.tsx", "type": "registry:ui" }]
 		},
@@ -158,7 +158,7 @@
 			"type": "registry:ui",
 			"title": "Card",
 			"description": "A hand-drawn card container styled with shadcn conventions.",
-			"dependencies": ["cnfast"],
+			"dependencies": ["cn"],
 			"registryDependencies": ["default", "sketch-provider"],
 			"files": [{ "path": "registry/components/ui/card.tsx", "type": "registry:ui" }]
 		},
@@ -167,7 +167,7 @@
 			"type": "registry:ui",
 			"title": "Tabs",
 			"description": "A hand-drawn Base UI tabs styled with shadcn conventions.",
-			"dependencies": ["@base-ui/react", "class-variance-authority", "cnfast"],
+			"dependencies": ["@base-ui/react", "class-variance-authority", "cn"],
 			"registryDependencies": ["default", "sketch-provider"],
 			"files": [{ "path": "registry/components/ui/tabs.tsx", "type": "registry:ui" }]
 		}

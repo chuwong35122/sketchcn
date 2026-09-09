@@ -1,6 +1,6 @@
 "use client"
 
-import cn from "cnfast"
+import { cn } from "cn"
 import type * as React from "react"
 import { useSketchOutline } from "./sketch-provider"
 

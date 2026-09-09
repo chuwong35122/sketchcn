@@ -4,7 +4,7 @@ import * as React from "react"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 
 import { Button } from "./button"
-import cn from "cnfast"
+import { cn } from "cn"
 import { X } from "@boxicons/react"
 import { useSketchOutline } from "./sketch-provider"
 

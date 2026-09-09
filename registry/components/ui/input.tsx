@@ -1,7 +1,7 @@
 "use client"
 
 import { Input as InputPrimitive } from "@base-ui/react/input"
-import cn from "cnfast"
+import { cn } from "cn"
 import { useLayoutEffect, useState } from "react"
 import { useSketchOutline } from "./sketch-provider"
 
