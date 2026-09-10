@@ -58,6 +58,13 @@ export function Highlight({ children }: { children: React.ReactNode }) {
   );
 }`;
 
+const BG_HACHURE_ANGLE_SNIPPET = `<div className="[--sketch-bg-hachure-angle:0]">
+  <Skeleton className="h-24 w-full" />
+</div>
+
+// or per instance, without touching the cascade
+const sketchBg = useSketchBg({ hachureAngle: 0 });`;
+
 const CSS_VARIABLES_SNIPPET = `<div className="[--sketch-roughness:2.6] [--sketch-bowing:2.4]">
   <Button>Rougher button</Button>
 </div>`;
@@ -136,6 +143,14 @@ const BG_DEFAULTS = [
 		defaultValue: "4",
 		cssVariable: "--sketch-bg-hachure-gap",
 		description: "Distance between hachure strokes.",
+	},
+	{
+		name: "hachureAngle",
+		type: "number",
+		defaultValue: "-45",
+		cssVariable: "--sketch-bg-hachure-angle",
+		description:
+			"Angle of the hachure strokes in degrees, measured clockwise from the x axis. Components that wipe their shading, such as Skeleton, read the same value to keep the reveal edge parallel to the strokes.",
 	},
 	{
 		name: "stroke",
@@ -523,6 +538,9 @@ function DocsPage() {
 				>
 					<CodeBlock code={BG_SNIPPET} />
 					<DocsSection.Reference rows={BG_DEFAULTS} />
+					<DocsSection.Block label="Override the hatch angle">
+						<CodeBlock code={BG_HACHURE_ANGLE_SNIPPET} />
+					</DocsSection.Block>
 					<DocsSection.Block label="Live">
 						<div className="flex flex-wrap items-center gap-4 p-4">
 							<BgPreview className="text-primary">Hachure</BgPreview>
@@ -535,6 +553,12 @@ function DocsPage() {
 								hachureGap={6}
 							>
 								Zigzag
+							</BgPreview>
+							<BgPreview className="text-primary [--sketch-bg-hachure-angle:0]">
+								Flat hatch
+							</BgPreview>
+							<BgPreview className="text-primary [--sketch-bg-hachure-angle:90]">
+								Upright hatch
 							</BgPreview>
 						</div>
 					</DocsSection.Block>

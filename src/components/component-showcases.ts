@@ -11,6 +11,8 @@ import { SeparatorExamples } from "./separator-examples";
 import { SeparatorShowcaseCard } from "./separator-showcase-card";
 import { SheetExamples } from "./sheet-examples";
 import { SheetShowcaseCard } from "./sheet-showcase-card";
+import { SkeletonExamples } from "./skeleton-examples";
+import { SkeletonShowcaseCard } from "./skeleton-showcase-card";
 import { SketchProviderExamples } from "./sketch-provider-examples";
 import { SketchProviderShowcaseCard } from "./sketch-provider-showcase-card";
 import { SwitchExamples } from "./switch-examples";
@@ -74,6 +76,14 @@ export const COMPONENT_SHOWCASES = [
 			"A hand-drawn Base UI separator styled with shadcn conventions.",
 		Showcase: SeparatorShowcaseCard,
 		Examples: SeparatorExamples,
+	},
+	{
+		slug: "skeleton",
+		title: "Skeleton",
+		description:
+			"A hand-drawn loading placeholder that animates its hachure shading.",
+		Showcase: SkeletonShowcaseCard,
+		Examples: SkeletonExamples,
 	},
 	{
 		slug: "toggle",
