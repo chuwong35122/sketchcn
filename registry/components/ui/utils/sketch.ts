@@ -11,7 +11,7 @@ export type SketchTheme = {
 
 export const SketchContext = createContext<SketchTheme | null>(null);
 
-export type SketchShape = "rectangle" | "underline";
+export type SketchShape = "rectangle" | "underline" | "vertical-line";
 
 export type SketchOutlineOptions = Omit<Partial<Options>, "seed"> & {
 	borderRadius?: number;
@@ -183,6 +183,16 @@ export function createUnderlinePath(
 	const bottom = height - strokeInset;
 
 	return `M ${strokeInset} ${bottom} H ${width - strokeInset}`;
+}
+
+export function createVerticalLinePath(
+	width: number,
+	height: number,
+	strokeInset: number,
+): string {
+	const right = width - strokeInset;
+
+	return `M ${right} ${strokeInset} V ${height - strokeInset}`;
 }
 
 function readScopedCssValue(

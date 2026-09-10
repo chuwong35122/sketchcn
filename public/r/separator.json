@@ -1,0 +1,23 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "separator",
+  "title": "Separator",
+  "description": "A hand-drawn Base UI separator styled with shadcn conventions.",
+  "dependencies": [
+    "@base-ui/react",
+    "class-variance-authority",
+    "cn"
+  ],
+  "registryDependencies": [
+    "default",
+    "sketch-provider"
+  ],
+  "files": [
+    {
+      "path": "registry/components/ui/separator.tsx",
+      "content": "\"use client\"\n\nimport { Separator as SeparatorPrimitive } from \"@base-ui/react/separator\"\nimport { cva } from \"class-variance-authority\"\nimport { cn } from \"cn\"\nimport type { ComponentProps } from \"react\"\nimport { useSketchOutline } from \"./sketch-provider\"\n\nconst SEPARATOR_VARIANTS = [\"solid\", \"dashed\", \"double\"] as const\n\nconst DOUBLE_LINE_GAP = \"3px\"\n\nconst separatorLine = cva(\n  \"relative isolate shrink-0 text-border [--sketch-stroke:currentColor]\",\n  {\n    variants: {\n      orientation: {\n        horizontal: \"w-full\",\n        vertical: \"self-stretch\",\n      },\n      variant: {\n        solid: \"\",\n        dashed: \"[--sketch-dash:6_5]\",\n        double: \"\",\n      },\n    },\n    compoundVariants: [\n      { orientation: \"horizontal\", variant: [\"solid\", \"dashed\"], class: \"h-px\" },\n      { orientation: \"horizontal\", variant: \"double\", class: \"h-1\" },\n      { orientation: \"vertical\", variant: [\"solid\", \"dashed\"], class: \"w-px\" },\n      { orientation: \"vertical\", variant: \"double\", class: \"w-1\" },\n    ],\n    defaultVariants: { orientation: \"horizontal\", variant: \"solid\" },\n  }\n)\n\nconst separatorLabel = cva(\"flex items-center\", {\n  variants: {\n    orientation: {\n      horizontal: \"w-full flex-row gap-3\",\n      vertical: \"h-full flex-col gap-2\",\n    },\n  },\n  defaultVariants: { orientation: \"horizontal\" },\n})\n\ntype SeparatorOrientation = \"horizontal\" | \"vertical\"\n\ntype SeparatorVariant = (typeof SEPARATOR_VARIANTS)[number]\n\ntype SketchLineProps = {\n  orientation: SeparatorOrientation\n  variant: SeparatorVariant\n}\n\ntype SeparatorProps = ComponentProps<\"div\"> & {\n  orientation?: SeparatorOrientation\n  variant?: SeparatorVariant\n}\n\nfunction Separator({\n  children,\n  className,\n  orientation = \"horizontal\",\n  variant = \"solid\",\n  ...props\n}: SeparatorProps) {\n  if (children === undefined) {\n    return (\n      <SeparatorPrimitive\n        data-slot=\"separator\"\n        data-variant={variant}\n        orientation={orientation}\n        className={cn(separatorLine({ orientation, variant }), className)}\n        {...props}\n      >\n        <SketchLines orientation={orientation} variant={variant} />\n      </SeparatorPrimitive>\n    )\n  }\n\n  return (\n    <div\n      role=\"separator\"\n      aria-orientation={orientation}\n      data-slot=\"separator\"\n      data-variant={variant}\n      className={cn(separatorLabel({ orientation }), className)}\n      {...props}\n    >\n      <SeparatorLine orientation={orientation} variant={variant} />\n      <span\n        data-slot=\"separator-label\"\n        className=\"shrink-0 text-muted-foreground text-xs\"\n      >\n        {children}\n      </span>\n      <SeparatorLine orientation={orientation} variant={variant} />\n    </div>\n  )\n}\n\nfunction SeparatorLine({ orientation, variant }: SketchLineProps) {\n  return (\n    <span\n      aria-hidden=\"true\"\n      data-slot=\"separator-line\"\n      className={cn(separatorLine({ orientation, variant }), \"flex-1 self-auto\")}\n    >\n      <SketchLines orientation={orientation} variant={variant} />\n    </span>\n  )\n}\n\nfunction SketchLines({ orientation, variant }: SketchLineProps) {\n  const shape = orientation === \"vertical\" ? \"vertical-line\" : \"underline\"\n  const line = useSketchOutline({ shape })\n  const secondLine = useSketchOutline({ shape })\n  const offset =\n    orientation === \"vertical\"\n      ? `translateX(-${DOUBLE_LINE_GAP})`\n      : `translateY(-${DOUBLE_LINE_GAP})`\n\n  return (\n    <>\n      <svg aria-hidden=\"true\" data-sketch-outline ref={line.ref} style={line.style} />\n      {variant === \"double\" && (\n        <svg\n          aria-hidden=\"true\"\n          data-sketch-outline\n          ref={secondLine.ref}\n          style={{ ...secondLine.style, transform: offset }}\n        />\n      )}\n    </>\n  )\n}\n\nexport { Separator, SEPARATOR_VARIANTS }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}

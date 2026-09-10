@@ -154,6 +154,24 @@
 			"files": [{ "path": "registry/components/ui/dialog.tsx", "type": "registry:ui" }]
 		},
 		{
+			"name": "sheet",
+			"type": "registry:ui",
+			"title": "Sheet",
+			"description": "A hand-drawn Base UI sheet styled with shadcn conventions.",
+			"dependencies": ["@base-ui/react", "@boxicons/react", "cn"],
+			"registryDependencies": ["default", "sketch-provider", "button"],
+			"files": [{ "path": "registry/components/ui/sheet.tsx", "type": "registry:ui" }]
+		},
+		{
+			"name": "separator",
+			"type": "registry:ui",
+			"title": "Separator",
+			"description": "A hand-drawn Base UI separator styled with shadcn conventions.",
+			"dependencies": ["@base-ui/react", "class-variance-authority", "cn"],
+			"registryDependencies": ["default", "sketch-provider"],
+			"files": [{ "path": "registry/components/ui/separator.tsx", "type": "registry:ui" }]
+		},
+		{
 			"name": "card",
 			"type": "registry:ui",
 			"title": "Card",

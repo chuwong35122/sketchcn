@@ -7,6 +7,8 @@ import { DialogExamples } from "./dialog-examples";
 import { DialogShowcaseCard } from "./dialog-showcase-card";
 import { InputExamples } from "./input-examples";
 import { InputShowcaseCard } from "./input-showcase-card";
+import { SeparatorExamples } from "./separator-examples";
+import { SeparatorShowcaseCard } from "./separator-showcase-card";
 import { SheetExamples } from "./sheet-examples";
 import { SheetShowcaseCard } from "./sheet-showcase-card";
 import { SketchProviderExamples } from "./sketch-provider-examples";
@@ -64,6 +66,14 @@ export const COMPONENT_SHOWCASES = [
 		description: "A hand-drawn Base UI sheet styled with shadcn conventions.",
 		Showcase: SheetShowcaseCard,
 		Examples: SheetExamples,
+	},
+	{
+		slug: "separator",
+		title: "Separator",
+		description:
+			"A hand-drawn Base UI separator styled with shadcn conventions.",
+		Showcase: SeparatorShowcaseCard,
+		Examples: SeparatorExamples,
 	},
 	{
 		slug: "toggle",

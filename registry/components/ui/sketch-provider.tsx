@@ -15,6 +15,7 @@ import {
   createRoundedRectanglePath,
   createSeed,
   createUnderlinePath,
+  createVerticalLinePath,
   DEFAULT_SEED,
   DEFAULT_STROKE_WIDTH,
   getBorderRadius,
@@ -146,6 +147,10 @@ function getSketchPath(
 ): string {
   if (shape === "underline") {
     return createUnderlinePath(width, height, strokeWidth);
+  }
+
+  if (shape === "vertical-line") {
+    return createVerticalLinePath(width, height, strokeWidth);
   }
 
   return createRoundedRectanglePath(width, height, getBorderRadius(target), strokeWidth);
