@@ -7,6 +7,8 @@ import { DialogExamples } from "./dialog-examples";
 import { DialogShowcaseCard } from "./dialog-showcase-card";
 import { InputExamples } from "./input-examples";
 import { InputShowcaseCard } from "./input-showcase-card";
+import { SheetExamples } from "./sheet-examples";
+import { SheetShowcaseCard } from "./sheet-showcase-card";
 import { SketchProviderExamples } from "./sketch-provider-examples";
 import { SketchProviderShowcaseCard } from "./sketch-provider-showcase-card";
 import { SwitchExamples } from "./switch-examples";
@@ -55,6 +57,13 @@ export const COMPONENT_SHOWCASES = [
 		description: "A hand-drawn Base UI dialog styled with shadcn conventions.",
 		Showcase: DialogShowcaseCard,
 		Examples: DialogExamples,
+	},
+	{
+		slug: "sheet",
+		title: "Sheet",
+		description: "A hand-drawn Base UI sheet styled with shadcn conventions.",
+		Showcase: SheetShowcaseCard,
+		Examples: SheetExamples,
 	},
 	{
 		slug: "toggle",
