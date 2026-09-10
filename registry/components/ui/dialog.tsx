@@ -6,7 +6,7 @@ import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 import { Button } from "./button"
 import { cn } from "cn"
 import { X } from "@boxicons/react"
-import { useSketchOutline } from "./sketch-provider"
+import { useSketchBg, useSketchOutline } from "./sketch-provider"
 
 function Dialog({ ...props }: DialogPrimitive.Root.Props) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />
@@ -26,17 +26,28 @@ function DialogClose({ ...props }: DialogPrimitive.Close.Props) {
 
 function DialogOverlay({
   className,
+  children,
   ...props
 }: DialogPrimitive.Backdrop.Props) {
+  const sketchBg = useSketchBg()
+
   return (
     <DialogPrimitive.Backdrop
       data-slot="dialog-overlay"
       className={cn(
-        "fixed inset-0 isolate z-50 bg-black/10 duration-100 supports-backdrop-filter:backdrop-blur-xs data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0",
+        "fixed inset-0 isolate z-50 text-muted-foreground [--sketch-bg-fill-style:hachure] [--sketch-bg-hachure-gap:10] transition-opacity duration-150 supports-backdrop-filter:backdrop-blur-xs data-ending-style:opacity-0 data-starting-style:opacity-0",
         className
       )}
       {...props}
-    />
+    >
+      {children}
+      <svg
+        aria-hidden="true"
+        data-sketch-bg
+        ref={sketchBg.ref}
+        style={sketchBg.style}
+      />
+    </DialogPrimitive.Backdrop>
   )
 }
 
