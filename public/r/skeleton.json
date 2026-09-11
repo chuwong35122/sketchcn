@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "skeleton",
+  "title": "Skeleton",
+  "description": "A hand-drawn loading placeholder that animates its hachure shading.",
+  "dependencies": [
+    "cn"
+  ],
+  "registryDependencies": [
+    "default",
+    "sketch-provider"
+  ],
+  "files": [
+    {
+      "path": "registry/components/ui/skeleton.tsx",
+      "content": "\"use client\"\n\nimport { cn } from \"cn\"\nimport type { ComponentProps } from \"react\"\nimport { useSketchBg, useSketchOutline } from \"./sketch-provider\"\n\nconst OUTLINE_OPACITY = 0.55\n\nfunction Skeleton({ children, className, ...props }: ComponentProps<\"div\">) {\n  const outline = useSketchOutline({ opacity: OUTLINE_OPACITY })\n  const shading = useSketchBg()\n\n  return (\n    <div\n      data-slot=\"skeleton\"\n      data-sketch-reveal\n      aria-hidden=\"true\"\n      className={cn(\n        \"relative isolate min-h-4 rounded-md text-muted-foreground [--sketch-stroke-width:1.2]\",\n        className\n      )}\n      {...props}\n    >\n      {children}\n      <svg\n        aria-hidden=\"true\"\n        data-sketch-outline\n        ref={outline.ref}\n        style={outline.style}\n      />\n      <svg\n        aria-hidden=\"true\"\n        data-sketch-bg\n        ref={shading.ref}\n        style={shading.style}\n      />\n    </div>\n  )\n}\n\nexport { Skeleton }\n",
+      "type": "registry:ui"
+    }
+  ],
+  "type": "registry:ui"
+}
