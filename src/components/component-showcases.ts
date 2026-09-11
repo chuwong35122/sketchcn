@@ -11,6 +11,8 @@ import { SeparatorExamples } from "./separator-examples";
 import { SeparatorShowcaseCard } from "./separator-showcase-card";
 import { SheetExamples } from "./sheet-examples";
 import { SheetShowcaseCard } from "./sheet-showcase-card";
+import { SidebarExamples } from "./sidebar-examples";
+import { SidebarShowcaseCard } from "./sidebar-showcase-card";
 import { SkeletonExamples } from "./skeleton-examples";
 import { SkeletonShowcaseCard } from "./skeleton-showcase-card";
 import { SketchProviderExamples } from "./sketch-provider-examples";
@@ -76,6 +78,14 @@ export const COMPONENT_SHOWCASES = [
 			"A hand-drawn Base UI separator styled with shadcn conventions.",
 		Showcase: SeparatorShowcaseCard,
 		Examples: SeparatorExamples,
+	},
+	{
+		slug: "sidebar",
+		title: "Sidebar",
+		description:
+			"A hand-drawn navigation panel that floats inside the page layout.",
+		Showcase: SidebarShowcaseCard,
+		Examples: SidebarExamples,
 	},
 	{
 		slug: "skeleton",

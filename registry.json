@@ -197,6 +197,33 @@
 			"dependencies": ["@base-ui/react", "class-variance-authority", "cn"],
 			"registryDependencies": ["default", "sketch-provider"],
 			"files": [{ "path": "registry/components/ui/tabs.tsx", "type": "registry:ui" }]
+		},
+		{
+			"name": "tooltip",
+			"type": "registry:ui",
+			"title": "Tooltip",
+			"description": "A hand-drawn Base UI tooltip styled with shadcn conventions.",
+			"dependencies": ["@base-ui/react", "cn"],
+			"registryDependencies": ["default", "sketch-provider"],
+			"files": [{ "path": "registry/components/ui/tooltip.tsx", "type": "registry:ui" }]
+		},
+		{
+			"name": "sidebar",
+			"type": "registry:ui",
+			"title": "Sidebar",
+			"description": "A hand-drawn sidebar that floats inside the page layout, styled with shadcn conventions.",
+			"dependencies": ["@base-ui/react", "@boxicons/react", "class-variance-authority", "cn"],
+			"registryDependencies": [
+				"default",
+				"sketch-provider",
+				"button",
+				"input",
+				"separator",
+				"sheet",
+				"skeleton",
+				"tooltip"
+			],
+			"files": [{ "path": "registry/components/ui/sidebar.tsx", "type": "registry:ui" }]
 		}
 	]
 }
