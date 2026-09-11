@@ -3,18 +3,7 @@
 import * as React from "react"
 
 import { cn } from "cn"
-import { useSketchOutline } from "./sketch-provider"
-
-const CARD_VARIANTS = [
-  "default",
-  "polkadots",
-  "hexagons",
-  "graph",
-  "plus",
-  "filled-dots",
-] as const
-
-type CardVariant = (typeof CARD_VARIANTS)[number]
+import { type PaperVariant, useSketchOutline } from "./sketch-provider"
 
 function Card({
   className,
@@ -22,7 +11,7 @@ function Card({
   size = "default",
   variant = "default",
   ...props
-}: React.ComponentProps<"div"> & { size?: "default" | "sm"; variant?: CardVariant }) {
+}: React.ComponentProps<"div"> & { size?: "default" | "sm"; variant?: PaperVariant }) {
   const sketchOutline = useSketchOutline()
 
   return (
@@ -127,5 +116,4 @@ export {
   CardAction,
   CardDescription,
   CardContent,
-  CARD_VARIANTS,
 }

@@ -82,7 +82,7 @@
   background-color: var(--background);
 }
 
-[data-paper]::before,
+[data-paper]:not([data-paper="default"])::before,
 [data-slot="card"][data-variant]:not([data-variant="default"])::before {
   content: "";
   position: absolute;

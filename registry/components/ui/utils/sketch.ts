@@ -5,6 +5,17 @@ export const DEFAULT_SEED = 20_260_828;
 export const DEFAULT_STROKE_WIDTH = 1.6;
 export const MIN_STROKE_WIDTH = 1;
 
+export const PAPER_VARIANTS = [
+	"default",
+	"polkadots",
+	"hexagons",
+	"graph",
+	"plus",
+	"filled-dots",
+] as const;
+
+export type PaperVariant = (typeof PAPER_VARIANTS)[number];
+
 export type SketchTheme = {
 	seed: number;
 };

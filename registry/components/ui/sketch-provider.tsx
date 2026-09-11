@@ -36,7 +36,8 @@ export type SketchProviderProps = {
   seed?: number;
 };
 
-export type { SketchOutline, SketchOutlineOptions, SketchScope, SketchShape } from "./utils/sketch";
+export { PAPER_VARIANTS } from "./utils/sketch";
+export type { PaperVariant, SketchOutline, SketchOutlineOptions, SketchScope, SketchShape } from "./utils/sketch";
 
 export function SketchProvider({ children, seed = DEFAULT_SEED }: SketchProviderProps) {
   const value = useMemo(() => ({ seed }), [seed]);

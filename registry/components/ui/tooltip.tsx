@@ -2,7 +2,7 @@
 
 import { Tooltip as TooltipPrimitive } from "@base-ui/react/tooltip"
 import { cn } from "cn"
-import { useSketchOutline } from "./sketch-provider"
+import { type PaperVariant, useSketchOutline } from "./sketch-provider"
 
 function TooltipProvider({
   delay = 200,
@@ -32,12 +32,13 @@ function TooltipContent({
   className,
   side = "top",
   sideOffset = 8,
+  variant = "polkadots",
   ...props
 }: TooltipPrimitive.Popup.Props &
   Pick<
     TooltipPrimitive.Positioner.Props,
     "align" | "alignOffset" | "side" | "sideOffset"
-  >) {
+  > & { variant?: PaperVariant }) {
   const sketchOutline = useSketchOutline()
 
   return (
@@ -51,8 +52,9 @@ function TooltipContent({
       >
         <TooltipPrimitive.Popup
           data-slot="tooltip-content"
+          data-paper={variant}
           className={cn(
-            "relative isolate inline-flex w-fit max-w-xs origin-(--transform-origin) items-center gap-1.5 rounded-lg bg-popover px-3 py-1.5 text-popover-foreground text-xs transition-[transform,opacity] duration-150 data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0",
+            "relative isolate inline-flex w-fit max-w-xs origin-(--transform-origin) items-center gap-1.5 overflow-clip [overflow-clip-margin:6px] rounded-lg bg-popover px-3 py-1.5 text-popover-foreground text-xs [--paper-opacity:0.3] transition-[transform,opacity] duration-150 data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0",
             className
           )}
           {...props}
